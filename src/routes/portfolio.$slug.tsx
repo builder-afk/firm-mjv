@@ -4,17 +4,22 @@ import { getMilestoneDate } from "@/lib/utils";
 import mdWatermark from "@/assets/md-watermark.png";
 import {
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   CheckCircle2,
   Globe,
-  Building2,
-  Calendar,
-  Award,
   Instagram,
   Youtube,
   Linkedin,
   Twitter,
   Facebook,
+  ExternalLink,
+  Sparkles,
+  TrendingUp,
+  Award,
+  Users,
+  Newspaper,
+  Quote,
 } from "lucide-react";
 
 export const Route = createFileRoute("/portfolio/$slug")({
@@ -26,7 +31,7 @@ export const Route = createFileRoute("/portfolio/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-        { title: `${loaderData.company.name} | Archival Dossier | MJV` },
+        { title: `${loaderData.company.name} | Portfolio Dossier | Mount Judi Ventures` },
         { name: "description", content: loaderData.company.oneLiner },
         { property: "og:title", content: `${loaderData.company.name} | Mount Judi Ventures` },
         { property: "og:description", content: loaderData.company.oneLiner },
@@ -40,12 +45,12 @@ export const Route = createFileRoute("/portfolio/$slug")({
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 text-white font-mono text-xs uppercase tracking-wider mb-4">
         404 Not Found
       </div>
-      <h1 className="font-display text-4xl font-extrabold uppercase">
+      <h1 className="font-display text-4xl font-extrabold uppercase text-neutral-950">
         Record Missing from Registry
       </h1>
       <Link
         to="/portfolio"
-        className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 text-white font-mono text-xs uppercase tracking-wider font-semibold"
+        className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 text-white font-mono text-xs uppercase tracking-wider font-semibold hover:bg-neutral-800 transition-colors"
       >
         Return to Portfolio
       </Link>
@@ -57,12 +62,35 @@ export const Route = createFileRoute("/portfolio/$slug")({
 function CompanyPage() {
   const { company: c } = Route.useLoaderData();
 
+  // Find adjacent companies for footer navigation
+  const currentIndex = companies.findIndex((item) => item.slug === c.slug);
+  const prevCompany = companies[(currentIndex - 1 + companies.length) % companies.length];
+  const nextCompany = companies[(currentIndex + 1) % companies.length];
+
+  const vehicleName =
+    c.fund === "Both"
+      ? "MJIMF & MJIGF"
+      : c.fund === "Growth Fund"
+        ? "MJIGF"
+        : c.fund === "Micro Fund"
+          ? "MJIMF"
+          : (c.fund ?? "MJIGF");
+
+  const statusDotColor =
+    c.status === "Active"
+      ? "bg-emerald-500 ring-emerald-500/20"
+      : c.status === "Acquired"
+        ? "bg-blue-500 ring-blue-500/20"
+        : c.status === "Partially Exited"
+          ? "bg-amber-500 ring-amber-500/20"
+          : "bg-neutral-900 ring-neutral-900/20";
+
   return (
-    <article className="bg-[var(--paper)] text-[var(--ink)] min-h-screen">
+    <article className="bg-[var(--paper)] text-[var(--ink)] min-h-screen selection:bg-[#036089]/20 selection:text-neutral-900">
       {/* ── 1. ARCHIVAL HERO & METADATA SPREAD ── */}
-      <section className="border-b border-black/15 pt-14 pb-0 md:pt-20 bg-white relative overflow-hidden">
-        {/* Mountain watermark */}
-        <div className="absolute -top-12 -right-10 w-[540px] h-[640px] pointer-events-none hidden md:block opacity-[0.25]">
+      <section className="border-b border-neutral-200/80 pt-10 pb-0 md:pt-14 bg-white relative overflow-hidden">
+        {/* Mountain watermark texture */}
+        <div className="absolute -top-8 -right-4 w-[560px] h-[680px] pointer-events-none hidden md:block opacity-[0.70] mix-blend-multiply">
           <img
             src={mdWatermark}
             alt=""
@@ -71,61 +99,95 @@ function CompanyPage() {
           />
         </div>
 
-        <div className="container-tight pb-12 md:pb-16 relative z-10">
+        <div className="container-tight relative z-10">
+          {/* Breadcrumb Header Row */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider font-bold text-neutral-500 hover:text-neutral-950 transition-colors group"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+              <span>Portfolio</span>
+              <span className="text-neutral-300">/</span>
+              <span className="text-[#036089]">{c.thesis}</span>
+            </Link>
 
-          <div className="mt-10 grid lg:grid-cols-[1fr_320px] gap-10 items-end">
+            <div className="hidden sm:flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+              <span>MJV Portfolio Dossier</span>
+              <span className="text-neutral-300">·</span>
+              <span className="text-neutral-900">{c.vintage || `FY${String(c.year).slice(-2)}`}</span>
+            </div>
+          </div>
+
+          {/* Main Hero Header: Company Info + Architectural Logo Card */}
+          <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-12 items-end pb-12 md:pb-16">
             <div>
-              {/* Thesis · Sector · Vintage Badges */}
+              {/* Badges Cluster */}
               <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold shadow-xs">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#036089] text-white font-mono text-[11px] uppercase tracking-wider font-bold shadow-2xs">
                   {c.thesis}
                 </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-white border-2 border-neutral-950 text-neutral-950 font-mono text-[11px] uppercase tracking-wider font-bold shadow-xs">
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-200/90 font-mono text-[11px] uppercase tracking-wider font-bold">
                   {c.sector}
                 </span>
                 {c.vintage && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-neutral-100 border border-neutral-300 text-neutral-800 font-mono text-[11px] uppercase tracking-wider font-bold">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-neutral-50 text-neutral-600 border border-neutral-200/70 font-mono text-[11px] uppercase tracking-wider font-bold">
                     VINTAGE {c.vintage}
                   </span>
                 )}
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-neutral-200/90 text-neutral-800 font-mono text-[11px] uppercase tracking-wider font-bold shadow-2xs">
+                  <span className={`w-1.5 h-1.5 rounded-full ${statusDotColor.split(" ")[0]}`} />
+                  {c.status}
+                </span>
               </div>
 
-              {/* Stage Progression Pills */}
+              {/* Stage Progression Pipeline */}
               {c.stages && c.stages.length > 0 && (
                 <div className="flex flex-wrap items-center gap-1.5 mb-5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 font-bold mr-1">Stages:</span>
-                  {c.stages.map((s, i) => (
-                    <span key={i} className="inline-flex items-center gap-1">
-                      {i > 0 && <span className="text-neutral-400 font-mono text-[10px]">→</span>}
-                      <span className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase tracking-wider font-bold ${i === c.stages.length - 1
-                        ? "bg-neutral-950 text-white"
-                        : "bg-neutral-100 text-neutral-700 border border-neutral-200"
-                        }`}>
-                        {s}
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold mr-1">
+                    Stages:
+                  </span>
+                  {c.stages.map((s, i) => {
+                    const isLatest = i === c.stages.length - 1;
+                    return (
+                      <span key={i} className="inline-flex items-center gap-1">
+                        {i > 0 && <span className="text-neutral-300 font-mono text-[10px]">→</span>}
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase tracking-wider font-bold ${isLatest
+                            ? "bg-neutral-950 text-white shadow-2xs"
+                            : "bg-neutral-100 text-neutral-600 border border-neutral-200/70"
+                            }`}
+                        >
+                          {s}
+                        </span>
                       </span>
-                    </span>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
-              <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-[-0.035em] uppercase leading-[0.94] text-neutral-950">
+
+              {/* Large Display Title */}
+              <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-tight uppercase leading-[0.92] text-neutral-950">
                 {c.name}
               </h1>
-              <p className="mt-5 font-serif italic text-xl sm:text-2xl md:text-3xl text-neutral-800 max-w-3xl leading-snug">
+
+              {/* Editorial Tagline */}
+              <p className="mt-5 font-serif italic text-xl sm:text-2xl md:text-[26px] text-neutral-700 max-w-3xl leading-snug border-l-2 border-[#036089]/60 pl-4 py-0.5">
                 &ldquo;{c.tagline}&rdquo;
               </p>
 
-              {/* Quick Social & Web Links */}
-              <div className="mt-6 flex flex-wrap items-center gap-2">
+              {/* Quick Web & Social Links */}
+              <div className="mt-7 flex flex-wrap items-center gap-2">
                 {c.website && (
                   <a
                     href={c.website}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border-2 border-neutral-950 text-neutral-950 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-bold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/90 text-neutral-900 hover:border-neutral-950 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-bold shadow-2xs group cursor-pointer"
                   >
-                    <Globe className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Globe className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>{c.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-70" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
                 {c.socials?.instagram && (
@@ -133,11 +195,11 @@ function CompanyPage() {
                     href={c.socials.instagram}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-950/20 hover:border-neutral-950 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/80 hover:border-neutral-950 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group cursor-pointer"
                   >
-                    <Instagram className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Instagram className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>Instagram</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-60" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
                 {c.socials?.youtube && (
@@ -145,11 +207,11 @@ function CompanyPage() {
                     href={c.socials.youtube}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-950/20 hover:border-neutral-950 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/80 hover:border-neutral-950 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group cursor-pointer"
                   >
-                    <Youtube className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Youtube className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>YouTube</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-60" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
                 {c.socials?.linkedin && (
@@ -157,11 +219,11 @@ function CompanyPage() {
                     href={c.socials.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-950/20 hover:border-neutral-950 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/80 hover:border-neutral-950 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group cursor-pointer"
                   >
-                    <Linkedin className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Linkedin className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>LinkedIn</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-60" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
                 {c.socials?.twitter && (
@@ -169,11 +231,11 @@ function CompanyPage() {
                     href={c.socials.twitter}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-950/20 hover:border-neutral-950 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/80 hover:border-neutral-950 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group cursor-pointer"
                   >
-                    <Twitter className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Twitter className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>X</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-60" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
                 {c.socials?.facebook && (
@@ -181,106 +243,137 @@ function CompanyPage() {
                     href={c.socials.facebook}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-950/20 hover:border-neutral-950 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-neutral-200/80 hover:border-neutral-950 text-neutral-800 hover:bg-neutral-950 hover:text-white transition-all font-mono text-xs font-semibold shadow-2xs group cursor-pointer"
                   >
-                    <Facebook className="h-3.5 w-3.5 text-neutral-600 group-hover:text-white transition-colors" />
+                    <Facebook className="h-3.5 w-3.5 text-neutral-500 group-hover:text-white transition-colors" />
                     <span>Facebook</span>
-                    <ArrowUpRight className="h-3 w-3 opacity-60" />
+                    <ArrowUpRight className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 )}
               </div>
             </div>
 
-            {/* Architectural Logo Badge */}
-            <div className="rounded-2xl sm:rounded-3xl border-2 border-neutral-950 bg-white p-6 sm:p-8 flex items-center justify-center h-32 shadow-sm">
+            {/* Architectural Logo Canvas Card */}
+            <div className="rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-6 sm:p-8 flex items-center justify-center h-36 sm:h-44 shadow-xs hover:shadow-md hover:border-neutral-300 transition-all relative overflow-hidden group">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none opacity-[0.03] group-hover:opacity-[0.06] transition-opacity"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, #000 1px, transparent 1px),
+                    linear-gradient(to bottom, #000 1px, transparent 1px)
+                  `,
+                  backgroundSize: "20px 20px",
+                }}
+              />
               <img
                 src={c.logo}
                 alt={`${c.name} logo`}
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300 relative z-10"
               />
             </div>
           </div>
         </div>
 
-        {/* Minimalist Sub-Bar Divider */}
-        <div className="w-full border-t border-black/10 bg-neutral-100/70 text-neutral-900 px-6 sm:px-10 py-3.5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-wider font-bold">
+        {/* Minimalist Sub-Bar Metadata Strip */}
+        <div className="w-full border-t border-neutral-200/80 bg-neutral-50/70 text-neutral-900 px-6 sm:px-10 py-3.5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-wider font-bold">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-neutral-900" />
-            <span>{c.thesis} · {c.sector}</span>
+            <span className="w-2 h-2 rounded-full bg-[#036089]" />
+            <span className="text-neutral-950">{c.thesis}</span>
+            <span className="text-neutral-400">·</span>
+            <span className="text-neutral-700">{c.sector}</span>
           </div>
-          <div className="flex items-center gap-4 text-[11px] text-neutral-600">
-            <span>Stage: {c.stages.join(" → ")}</span>
-            <span>·</span>
-            {c.vintage && <><span>Vintage: {c.vintage}</span><span>·</span></>}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-neutral-600">
+            <span>Stage: <span className="text-neutral-900">{c.stages.join(" → ")}</span></span>
+            <span className="text-neutral-300">·</span>
+            {c.vintage && (
+              <>
+                <span>Vintage: <span className="text-neutral-900">{c.vintage}</span></span>
+                <span className="text-neutral-300">·</span>
+              </>
+            )}
             <span>
-              Vehicle:{" "}
-              {c.fund === "Both"
-                ? "MJIMF & MJIGF"
-                : c.fund === "Growth Fund"
-                  ? "MJIGF"
-                  : c.fund === "Micro Fund"
-                    ? "MJIMF"
-                    : (c.fund ?? "MJIGF")}
+              Vehicle: <span className="text-neutral-900">{vehicleName}</span>
             </span>
           </div>
         </div>
       </section>
 
       {/* ── 2. CORE DOSSIER & OPERATIONAL SPREAD ── */}
-      <section className="container-tight py-10 md:py-14">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Image Section & Technical Ledger */}
-          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24 lg:self-start">
+      <section className="container-tight py-12 md:py-16">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* ═══════════════════════════════════════════════════════
+              LEFT COLUMN: FIELD DEPLOYMENT & TECHNICAL SPEC SHEET
+             ═══════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-5 space-y-7 lg:sticky lg:top-24 lg:self-start">
             {/* Operational Field Deployment Image */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-neutral-950 shadow-sm bg-neutral-950">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-neutral-200/90 shadow-sm bg-neutral-950 group">
               <img
                 src={c.image}
                 alt={c.name}
-                className="h-full w-full object-cover"
+                className={`h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${c.imagePosition ?? (c.slug === "internshala" ? "object-top" : "")}`}
                 width={1200}
                 height={900}
                 decoding="async"
                 fetchPriority="high"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <div className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-white font-mono text-[10px] uppercase tracking-wider border border-white/20 font-bold">
+                <div className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white font-mono text-[10px] uppercase tracking-wider border border-white/20 font-bold shadow-md">
                   {c.name.toUpperCase()} · FIELD DEPLOYMENT
                 </div>
               </div>
             </div>
 
-            {/* Technical Attributes Bento Grid */}
-            <div className="rounded-2xl sm:rounded-3xl border-2 border-neutral-950 bg-white p-3 shadow-xs">
+            {/* Technical Attributes Ledger (Specification Sheet) */}
+            <div className="rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-5 sm:p-6 shadow-xs">
+              <div className="flex items-center justify-between pb-3.5 border-b border-neutral-100 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#036089]" />
+                  <span className="font-mono text-xs uppercase tracking-wider font-bold text-neutral-900">
+                    Investment Specs
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-100 font-mono text-[10px] font-bold tracking-wider uppercase text-neutral-700">
+                  <span className={`w-1.5 h-1.5 rounded-full ${statusDotColor.split(" ")[0]}`} />
+                  {c.status}
+                </span>
+              </div>
+
               <div className="grid grid-cols-2 gap-2 font-mono text-xs">
-                <div className="p-4 rounded-xl bg-neutral-950 text-white border border-neutral-950 col-span-2">
+                {/* Thesis Pillar Header Tile */}
+                <div className="p-3.5 sm:p-4 rounded-xl bg-neutral-950 text-white col-span-2 shadow-2xs">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">
                     Thesis Pillar
                   </div>
-                  <div className="mt-1.5 font-bold text-sm sm:text-base text-white">
+                  <div className="mt-1 font-bold text-sm sm:text-base text-white">
                     {c.thesis}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Sector
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm text-neutral-950 truncate">
+                  <div className="mt-1 font-bold text-xs sm:text-sm text-neutral-950 truncate">
                     {c.sector}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Current Stage
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm text-neutral-950 truncate">
+                  <div className="mt-1 font-bold text-xs sm:text-sm text-neutral-950 truncate">
                     {c.stage}
                   </div>
                 </div>
-                {/* Stage Progression (full width) */}
-                {c.stages.length > 1 && (
-                  <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5 col-span-2">
+
+                {/* Stage Progression Tile */}
+                {c.stages && c.stages.length > 1 && (
+                  <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60 col-span-2">
                     <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold mb-2">
                       Stage Progression
                     </div>
@@ -288,10 +381,12 @@ function CompanyPage() {
                       {c.stages.map((s, i) => (
                         <span key={i} className="inline-flex items-center gap-1">
                           {i > 0 && <span className="text-neutral-400 text-[10px]">→</span>}
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold ${i === c.stages.length - 1
-                            ? "bg-neutral-950 text-white"
-                            : "bg-neutral-200 text-neutral-700"
-                            }`}>
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold ${i === c.stages.length - 1
+                              ? "bg-neutral-950 text-white"
+                              : "bg-neutral-200/80 text-neutral-700"
+                              }`}
+                          >
                             {s}
                           </span>
                         </span>
@@ -299,54 +394,49 @@ function CompanyPage() {
                     </div>
                   </div>
                 )}
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Vintage
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm text-neutral-950">
+                  <div className="mt-1 font-bold text-xs sm:text-sm text-neutral-950">
                     {c.vintage || `FY${String(c.year).slice(-2)}`}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Status
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm text-neutral-950 flex items-center gap-1.5">
-                    <span className={`w-1.5 h-1.5 rounded-full ${c.status === "Active" ? "bg-emerald-500" :
-                      c.status === "Acquired" ? "bg-blue-500" :
-                        c.status === "Partially Exited" ? "bg-amber-500" :
-                          "bg-neutral-900"
-                      }`} />
+                  <div className="mt-1 font-bold text-xs sm:text-sm text-neutral-950 flex items-center gap-1.5">
+                    <span className={`w-1.5 h-1.5 rounded-full ${statusDotColor.split(" ")[0]}`} />
                     {c.status}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Fund Vehicle
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm text-neutral-950">
-                    {c.fund === "Both"
-                      ? "MJIMF & MJIGF"
-                      : c.fund === "Growth Fund"
-                        ? "MJIGF"
-                        : c.fund === "Micro Fund"
-                          ? "MJIMF"
-                          : (c.fund ?? "MJIGF")}
+                  <div className="mt-1 font-bold text-xs sm:text-sm text-neutral-950">
+                    {vehicleName}
                   </div>
                 </div>
-                <div className="p-4 rounded-xl bg-neutral-50/90 border border-black/5">
+
+                <div className="p-3.5 rounded-xl bg-neutral-50/90 border border-neutral-200/60">
                   <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
                     Direct Domain
                   </div>
-                  <div className="mt-1.5 font-bold text-xs sm:text-sm truncate">
+                  <div className="mt-1 font-bold text-xs sm:text-sm truncate">
                     {c.website ? (
                       <a
                         href={c.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-neutral-950 hover:text-neutral-600 underline font-bold inline-flex items-center gap-0.5"
+                        className="text-neutral-950 hover:text-[#036089] underline font-bold inline-flex items-center gap-0.5 transition-colors"
                       >
-                        {c.website.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
+                        <span>{c.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                        <ArrowUpRight className="h-3 w-3 inline" />
                       </a>
                     ) : (
                       "N/A"
@@ -357,15 +447,21 @@ function CompanyPage() {
             </div>
           </div>
 
-          {/* Right Column: Starts with Overview! */}
-          <div className="lg:col-span-7 space-y-12">
+          {/* ═══════════════════════════════════════════════════════
+              RIGHT COLUMN: EDITORIAL DOSSIER & INVESTMENT MEMO
+             ═══════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-7 space-y-12 sm:space-y-14">
             {/* 01 // OVERVIEW */}
             {c.description && (
               <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                  <span> OVERVIEW </span>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span>Company Overview</span>
                 </div>
-                <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-800 space-y-4">
+                <h2 className="font-display font-black text-2xl sm:text-3xl text-neutral-950 tracking-tight leading-tight mb-4">
+                  What {c.name} Does
+                </h2>
+                <div className="font-sans text-base sm:text-[17px] leading-relaxed text-neutral-700 space-y-4">
                   {c.description.split("\n\n").map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}
@@ -373,54 +469,101 @@ function CompanyPage() {
               </div>
             )}
 
-            {/* Why We Invested Memorandum */}
+            {/* 02 // WHY WE INVESTED MEMORANDUM */}
             {c.whyInvested && (
-              <div className="rounded-2xl sm:rounded-3xl border-2 border-neutral-950 bg-white p-8 md:p-10 shadow-xs">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-xs uppercase tracking-wider font-bold mb-5 shadow-xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                  <span> WHY WE INVESTED </span>
+              <div>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span>Investment Thesis</span>
                 </div>
-                <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-900 space-y-4">
-                  {c.whyInvested.split("\n\n").map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
+                <div className="rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-[#fbfbfb] p-7 sm:p-9 shadow-2xs hover:border-neutral-300 transition-colors relative overflow-hidden">
+                  <div className="flex items-center justify-between gap-3 mb-5 pb-3 border-b border-neutral-200/70">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#036089]/10 text-[#036089] font-mono text-[10px] font-bold uppercase tracking-wider border border-[#036089]/20">
+                      <Sparkles className="w-3 h-3" />
+                      <span>Why We Invested</span>
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
+                      MJV Partner Memorandum
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-neutral-950 mb-4 tracking-tight">
+                    Core Investment Rationale
+                  </h3>
+                  <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-800 space-y-3.5">
+                    {c.whyInvested.split("\n\n").map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Growth Since Investment */}
+            {/* 03 // THE PROBLEM WE SAW (If Defined) */}
+            {c.problem && (
+              <div>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span>Market Inefficiency</span>
+                </div>
+                <div className="rounded-2xl bg-white border border-neutral-200/80 p-6 sm:p-7 shadow-2xs">
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-neutral-950 mb-3 tracking-tight">
+                    The Problem Solved
+                  </h3>
+                  <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-700 space-y-3">
+                    {c.problem.split("\n\n").map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 04 // SCALE & TRACTION */}
             {c.growthSinceInvestment && (
               <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                  <span> SCALE & TRACTION </span>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span>04 // Scale &amp; Traction</span>
                 </div>
-                <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-800 space-y-4">
-                  {c.growthSinceInvestment.split("\n\n").map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
+                <div className="rounded-2xl bg-white border border-neutral-200/90 border-l-4 border-l-[#036089] p-6 sm:p-8 shadow-2xs">
+                  <div className="flex items-center gap-2 font-display font-bold text-lg sm:text-xl text-neutral-950 mb-3">
+                    <TrendingUp className="w-5 h-5 text-[#036089]" />
+                    <span>Growth Since Investment</span>
+                  </div>
+                  <div className="font-sans text-sm sm:text-base leading-relaxed text-neutral-800 space-y-3">
+                    {c.growthSinceInvestment.split("\n\n").map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Key Achievements */}
+            {/* 05 // KEY ACHIEVEMENTS / CONVICTION POINTS */}
             {(() => {
               const points = c.keyAchievements ?? c.convictionPoints;
               if (!points || points.length === 0) return null;
               return (
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                    <span>
-                      {c.keyAchievements ? " KEY ACHIEVEMENTS " : " CONVICTION POINTS "}
-                    </span>
+                  <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                    <span> {c.keyAchievements ? "Key Achievements" : "Conviction Points"}</span>
                   </div>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-neutral-950 mb-5 tracking-tight">
+                    Operating Milestones &amp; Proof Points
+                  </h3>
                   <ul className="grid sm:grid-cols-2 gap-4">
                     {points.map((p: string, i: number) => (
-                      <li key={p} className="rounded-2xl border-2 border-neutral-950 bg-white p-5 shadow-xs">
-                        <div className="flex items-start gap-3.5">
-                          <span className="w-5 h-5 rounded-full bg-neutral-950 text-white flex items-center justify-center font-mono text-[10px] font-bold shrink-0 mt-0.5">
+                      <li
+                        key={p}
+                        className="rounded-2xl border border-neutral-200/90 bg-white p-5 sm:p-6 shadow-2xs hover:shadow-xs hover:border-neutral-300 transition-all flex flex-col justify-between"
+                      >
+                        <div className="flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-md bg-[#036089]/10 text-[#036089] flex items-center justify-center font-mono text-[11px] font-bold shrink-0 mt-0.5">
                             {String(i + 1).padStart(2, "0")}
                           </span>
-                          <p className="font-sans text-xs sm:text-sm leading-relaxed text-neutral-800">
+                          <p className="font-sans text-xs sm:text-sm leading-relaxed text-neutral-800 font-medium">
                             {p}
                           </p>
                         </div>
@@ -431,7 +574,7 @@ function CompanyPage() {
               );
             })()}
 
-            {/* Founders */}
+            {/* 06 // FOUNDING LEADERSHIP */}
             {(() => {
               const raw = c.founders ?? "";
               if (!raw || /^founding\b/i.test(raw.trim())) return null;
@@ -442,10 +585,14 @@ function CompanyPage() {
               if (names.length === 0) return null;
               return (
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                    <span> LEADERSHIP </span>
+                  <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                    <span>Leadership Team</span>
                   </div>
-                  <ul className="grid gap-3 sm:grid-cols-2">
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-neutral-950 mb-5 tracking-tight">
+                    Founders &amp; Operators
+                  </h3>
+                  <ul className="grid gap-3.5 sm:grid-cols-2">
                     {names.map((name: string) => {
                       const direct = c.founderLinkedins?.[name];
                       const q = encodeURIComponent(`${name} ${c.name}`);
@@ -456,13 +603,19 @@ function CompanyPage() {
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center justify-between gap-4 rounded-2xl border-2 border-neutral-950 bg-white p-4 hover:bg-neutral-50 transition shadow-xs"
+                            className="group flex items-center justify-between gap-4 rounded-2xl border border-neutral-200/90 bg-white p-4 sm:p-5 hover:border-neutral-950 hover:shadow-sm transition-all shadow-2xs"
                           >
-                            <span className="font-display text-sm sm:text-base font-bold text-neutral-950 truncate">
-                              {name}
-                            </span>
-                            <span className="px-3 py-1 rounded-full bg-neutral-100 font-mono text-[10px] uppercase tracking-wider text-neutral-900 group-hover:bg-neutral-950 group-hover:text-white transition-all inline-flex items-center gap-1 font-bold shrink-0 border border-neutral-950/15">
-                              LinkedIn <ArrowUpRight className="h-3 w-3" />
+                            <div className="min-w-0">
+                              <span className="font-display text-sm sm:text-base font-bold text-neutral-950 group-hover:text-neutral-900 transition-colors truncate block">
+                                {name}
+                              </span>
+                              <span className="font-mono text-[11px] text-neutral-500 font-medium block mt-0.5">
+                                Co-Founder / Leadership
+                              </span>
+                            </div>
+                            <span className="px-3 py-1.5 rounded-full bg-neutral-100 font-mono text-[10px] uppercase tracking-wider text-neutral-800 group-hover:bg-[#036089] group-hover:text-white transition-all inline-flex items-center gap-1 font-bold shrink-0 border border-neutral-200 group-hover:border-[#036089]">
+                              <span>LinkedIn</span>
+                              <ArrowUpRight className="h-3 w-3" />
                             </span>
                           </a>
                         </li>
@@ -473,12 +626,16 @@ function CompanyPage() {
               );
             })()}
 
-            {/* Press & Citations */}
+            {/* 07 // MEDIA COVERAGE */}
             {c.milestones && c.milestones.length > 0 && (
               <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                  <span> MEDIA COVERAGE </span>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span> Media Coverage</span>
                 </div>
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-neutral-950 mb-5 tracking-tight">
+                  Press &amp; Citations
+                </h3>
                 <div className="space-y-3">
                   {c.milestones.map((m: { title: string; url: string; image?: string; date?: string }) => {
                     const articleDate = getMilestoneDate(m, c.year);
@@ -488,17 +645,19 @@ function CompanyPage() {
                         href={m.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="p-4 sm:p-5 rounded-2xl border-2 border-neutral-950 bg-white flex items-center justify-between font-mono text-xs hover:bg-neutral-50 transition shadow-xs group gap-3"
+                        className="p-4 sm:p-5 rounded-2xl border border-neutral-200/80 bg-white flex items-center justify-between gap-4 font-mono text-xs hover:border-neutral-950 hover:shadow-xs transition-all shadow-2xs group"
                       >
-                        <span className="font-bold text-neutral-950 flex items-center gap-2 min-w-0">
-                          <span className="text-neutral-950 font-bold shrink-0">→</span>
+                        <span className="font-sans font-bold text-xs sm:text-sm text-neutral-900 group-hover:text-[#036089] transition-colors flex items-center gap-2.5 min-w-0">
+                          <span className="text-neutral-400 group-hover:text-[#036089] group-hover:translate-x-0.5 transition-all shrink-0">
+                            →
+                          </span>
                           <span className="truncate">{m.title}</span>
                         </span>
                         <div className="flex items-center gap-2.5 shrink-0">
-                          <span className="px-2.5 py-0.5 rounded-full bg-neutral-100 font-mono text-[10px] text-neutral-700 font-bold tracking-wider uppercase border border-neutral-950/15">
+                          <span className="px-2.5 py-1 rounded-full bg-neutral-100 font-mono text-[10px] text-neutral-700 font-bold tracking-wider uppercase border border-neutral-200/60">
                             {articleDate}
                           </span>
-                          <ArrowUpRight className="h-4 w-4 shrink-0 text-neutral-400 group-hover:text-neutral-950 transition-colors" />
+                          <ArrowUpRight className="h-4 w-4 shrink-0 text-neutral-400 group-hover:text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                         </div>
                       </a>
                     );
@@ -507,30 +666,94 @@ function CompanyPage() {
               </div>
             )}
 
-            {/* Founder Testimonial */}
+            {/* 08 // FOUNDER TESTIMONIAL */}
             {c.testimonial && (
-              <div className="rounded-2xl sm:rounded-3xl border-2 border-neutral-950 bg-white p-8 md:p-10 shadow-sm">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-950 text-white font-mono text-[11px] uppercase tracking-wider font-bold mb-5 shadow-xs">
-                  <span> FOUNDER TESTIMONIAL </span>
+              <div>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-[#036089] font-bold mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#036089]" />
+                  <span> Founder Endorsement</span>
                 </div>
-                <blockquote className="font-serif italic text-xl md:text-2xl text-neutral-950 leading-snug">
-                  &ldquo;{c.testimonial.quote}&rdquo;
-                </blockquote>
-                <div className="mt-5 font-mono text-xs uppercase tracking-widest text-neutral-600 font-bold">
-                  — {c.testimonial.author}
+                <div className="rounded-2xl sm:rounded-3xl border border-neutral-900 bg-neutral-950 text-white p-8 sm:p-10 relative overflow-hidden shadow-lg">
+                  <Quote
+                    aria-hidden="true"
+                    className="absolute -right-4 -bottom-4 w-32 h-32 text-white/[0.04] select-none pointer-events-none"
+                  />
+                  <blockquote className="font-serif italic text-xl sm:text-2xl text-neutral-100 leading-snug relative z-10">
+                    &ldquo;{c.testimonial.quote}&rdquo;
+                  </blockquote>
+                  <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 relative z-10">
+                    <div className="font-mono text-xs uppercase tracking-widest text-[#d9a13b] font-bold flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d9a13b]" />
+                      <span>— {c.testimonial.author}</span>
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400">
+                      Portfolio Company Founder
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Footer Intake Banner */}
-        <div className="mt-16 md:mt-20 rounded-2xl sm:rounded-3xl border-2 border-neutral-950 bg-neutral-950 text-white p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white font-mono text-xs  tracking-wider font-semibold mb-2">
-              BUILDING IN {c.sector.toUpperCase()}?
+        {/* ── 3. ADJACENT COMPANY PAGINATION ── */}
+        <div className="mt-14 pt-8 border-t border-neutral-200/80 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Link
+            to="/portfolio/$slug"
+            params={{ slug: prevCompany.slug }}
+            className="p-5 rounded-2xl bg-white border border-neutral-200/80 hover:border-neutral-950 transition-all shadow-2xs group flex items-center gap-4"
+          >
+            <div className="w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 group-hover:bg-neutral-950 group-hover:text-white transition-colors">
+              <ArrowLeft className="w-4 h-4" />
             </div>
-            <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white ">
+            <div className="min-w-0">
+              <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
+                Previous Company
+              </div>
+              <div className="font-display font-bold text-base text-neutral-950 truncate">
+                {prevCompany.name}
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            to="/portfolio/$slug"
+            params={{ slug: nextCompany.slug }}
+            className="p-5 rounded-2xl bg-white border border-neutral-200/80 hover:border-neutral-950 transition-all shadow-2xs group flex items-center justify-between text-right gap-4"
+          >
+            <div className="min-w-0 flex-1">
+              <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 font-bold">
+                Next Company
+              </div>
+              <div className="font-display font-bold text-base text-neutral-950 truncate">
+                {nextCompany.name}
+              </div>
+            </div>
+            <div className="w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 group-hover:bg-neutral-950 group-hover:text-white transition-colors">
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
+        </div>
+
+        {/* ── 4. FOOTER INTAKE BANNER ── */}
+        <div className="mt-12 md:mt-16 rounded-2xl sm:rounded-3xl border border-neutral-900 bg-neutral-950 text-white p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
+              `,
+              backgroundSize: "28px 28px",
+            }}
+          />
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white font-mono text-xs tracking-wider font-semibold mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#d9a13b]" />
+              <span>BUILDING IN {c.sector.toUpperCase()}?</span>
+            </div>
+            <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               Building wealth through symbiotic growth
             </h3>
             <p className="mt-2 text-xs sm:text-sm text-white/70 font-sans max-w-md">
@@ -539,10 +762,10 @@ function CompanyPage() {
           </div>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white hover:bg-neutral-100 text-neutral-900 font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-md shrink-0"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white hover:bg-neutral-100 text-neutral-900 font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-md shrink-0 relative z-10 group"
           >
             <span>Submit Your Deck</span>
-            <span>→</span>
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>
         </div>
       </section>

@@ -128,7 +128,7 @@ function TeamPage() {
       key={m.slug}
       type="button"
       onClick={() => setActive(m)}
-      className="bg-white border-2 border-neutral-950 rounded-2xl sm:rounded-3xl p-3 flex flex-col justify-between text-left group cursor-pointer hover:shadow-lg transition-all duration-200 h-full"
+      className="bg-white border-2 border-neutral-950 rounded-2xl sm:rounded-3xl p-3 flex flex-col text-left group cursor-pointer hover:shadow-lg transition-all duration-200"
     >
       <div>
         <div className="aspect-[4/3] w-full rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center p-1">
@@ -152,7 +152,7 @@ function TeamPage() {
 
       {/* Dedicated Tagline Box with padding below (NOT on the photo) */}
       {m.summary && (
-        <div className="mt-1.5 bg-neutral-50 border border-black/10 rounded-xl p-2.5 sm:p-3">
+        <div className="mt-2.5 bg-neutral-50 border border-black/10 rounded-xl p-2.5 sm:p-3">
           <div className="flex items-start gap-1.5">
             <span className="text-sm sm:text-base text-neutral-400 font-serif leading-none select-none shrink-0 mt-0.5">“</span>
             <p className="font-sans text-[13px] sm:text-sm text-neutral-900 leading-snug font-medium">{m.summary}</p>
@@ -201,9 +201,9 @@ function TeamPage() {
             </div>
           </div>
           <div className="relative pb-10 md:pb-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
               {/* Cell 1 (Row 1, Col 1): Heading + Descriptive Text */}
-              <div className="flex flex-col justify-between h-full p-2 sm:p-3 pr-4 space-y-6">
+              <div className="flex flex-col p-2 sm:p-3 pr-4 space-y-4">
                 <div>
                   <h2 className="font-display text-2xl sm:text-3xl lg:text-3xl font-black uppercase text-neutral-950 leading-tight tracking-tight">
                     Brands & creative
@@ -212,12 +212,6 @@ function TeamPage() {
                   </h2>
                 </div>
                 <p className="text-base text-neutral-900 leading-relaxed">We bring together visionary brands, creative talent, and strategic partners to build meaningful collaborations. Through shared expertise, strong networks, and innovative thinking, by helping businesses strengthen their market presence, unlock new opportunities, and create lasting impact.</p>
-
-
-
-                <div className="pt-4 lg:pt-8">
-
-                </div>
               </div>
 
               {/* Cell 2 (Row 1, Col 2): Sherif Kottapurath */}
@@ -231,7 +225,7 @@ function TeamPage() {
             </div>
           </div>
           <div className="relative pb-10 md:pb-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
               <div className="hidden lg:block"></div>
               {/* Cell 6 (Row 2, Col 2): Imad Ahmed Shariff */}
               {imad && renderPartnerCard(imad)}
@@ -246,7 +240,7 @@ function TeamPage() {
 
           {/* Second row for added members */}
           <div className="relative pb-10 md:pb-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
               <div className="flex flex-col justify-between h-full p-2 sm:p-3 pr-4 space-y-6">
                 <div>
                   <p>

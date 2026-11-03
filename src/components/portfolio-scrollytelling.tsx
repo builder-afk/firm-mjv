@@ -234,7 +234,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     statLabel: "Annual Run Rate Scaled",
     date: "January 2024",
     source: "YourStory & Inc42",
-    url: "https://yourstory.com/2024/01/health-food-brand-lo-foods-raises-funds",
+    url: "https://yourstory.com/2025/07/lo-foods-nears-rs-100-cr-arr-3m-funding-protein-chef",
     headline: "Protein Chef Nears ₹100 Cr ARR with High-Protein & Low-Carb Nutrition Line",
     summary:
       "Formulating clinical low-carb, keto-friendly, and diabetic-safe food staples to tackle India's metabolic lifestyle crisis. Expanded beyond online marketplaces into 1,200+ modern trade supermarkets and tier-1 hospital pharmacy networks nationwide.",
@@ -550,8 +550,7 @@ export function PortfolioNewsScrollytelling() {
                         src={item.image}
                         alt={item.headline}
                         loading="lazy"
-                        className={`w-full h-full object-cover object-center transition-transform duration-300 ${isActive ? "scale-105" : "group-hover:scale-105"
-                          }`}
+                        className={`w-full h-full transition-transform duration-300 ${isActive ? "scale-105" : "group-hover:scale-105"} ${item.company.toLowerCase().includes("internshala") ? "object-cover object-top" : "object-cover object-center"}`}
                       />
                     </div>
                   </div>

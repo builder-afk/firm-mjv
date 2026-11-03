@@ -51,7 +51,7 @@ const themes: Theme[] = [
     accentBg: "bg-neutral-900",
     accentText: "text-white",
     pinColor: "gold",
-    badge: "THEME 01 // CATEGORY FOCUS",
+    badge: "THEME - CATEGORY FOCUS",
     innerBg: "bg-[#C78D1E]/10",
     innerBorder: "border-[#C78D1E]/30",
     numberColor: "text-[#C78D1E]",
@@ -100,7 +100,7 @@ const themes: Theme[] = [
     accentBg: "bg-neutral-700",
     accentText: "text-white",
     pinColor: "blue",
-    badge: "THEME 02 // INDUSTRIAL INFRASTRUCTURE",
+    badge: "THEME - INDUSTRIAL INFRASTRUCTURE",
     innerBg: "bg-[#036089]/10",
     innerBorder: "border-[#036089]/30",
     numberColor: "text-[#036089]",
@@ -141,7 +141,7 @@ const themes: Theme[] = [
     accentBg: "bg-neutral-900",
     accentText: "text-white",
     pinColor: "blue",
-    badge: "THEME 03 // HARD ENGINEERING & IP",
+    badge: "THEME - HARD ENGINEERING & IP",
     innerBg: "bg-[#036089]/10",
     innerBorder: "border-[#036089]/30",
     numberColor: "text-[#036089]",
@@ -319,10 +319,10 @@ function Thesis() {
           {/* Top Intro Section: Headline + Stat Card */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 md:mb-12">
             <div className="max-w-2xl">
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[#036089] font-bold mb-3">
+              <div className="font-mono text-xs tracking-[0.25em] text-[#036089] font-bold mb-3">
                 MJV thesis
               </div>
-              <h2 className="font-display text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-neutral-950 leading-[0.95]">
+              <h2 className="font-display text-4xl sm:text-5xl xl:text-6xl font-black tracking-tight text-neutral-950 leading-[0.95]">
                 Where India&rsquo;s Value Settles.
               </h2>
               <p className="mt-5 text-sm sm:text-base text-neutral-700 leading-relaxed font-sans font-medium">
@@ -333,7 +333,7 @@ function Thesis() {
             </div>
 
             {/* Warm Anchor Stat Card (#C78D1E) */}
-            <div className="shrink-0 lg:max-w-xs rounded-2xl bg-[#C78D1E] border-2 border-neutral-950 p-5 sm:p-6 shadow-xs text-neutral-950">
+            <div className="shrink-0 lg:max-w-xs rounded-2xl bg-[#d9a13b] p-5 sm:p-6 shadow-xs text-neutral-950">
               <div className="flex items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-950/80">
                 <span>Portfolio Strategy</span>
                 <span className="text-neutral-950 font-black">₹150+ CR</span>
@@ -347,9 +347,9 @@ function Thesis() {
               <div className="mt-4 pt-3 border-t border-neutral-950/20 flex items-center justify-between">
                 <a
                   href="#consumer"
-                  className="inline-flex items-center gap-1 font-mono text-xs font-bold uppercase tracking-wider text-neutral-950 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1 font-mono text-xs font-bold tracking-wider text-neutral-950 hover:text-white transition-colors"
                 >
-                  <span>Explore Monograph</span>
+                  <span>Explore Thesis</span>
                   <span>↘</span>
                 </a>
               </div>
@@ -444,7 +444,7 @@ function Thesis() {
                 return (
                   <div
                     key={t.number}
-                    className={`rounded-2xl border-2 border-neutral-950 bg-[#036089] p-6 sm:p-7 shadow-xs flex flex-col justify-between min-h-[380px] ${verticalStagger} text-white`}
+                    className={`rounded-2xl bg-[#0b7aa8] p-6 sm:p-7 shadow-xs flex flex-col justify-between min-h-[380px] ${verticalStagger} text-white`}
                   >
                     <div>
                       {/* Card Header Row */}
@@ -462,7 +462,7 @@ function Thesis() {
                       </div>
 
                       <h3 className="mt-4 font-display text-2xl lg:text-[26px] font-black uppercase tracking-tight text-white leading-tight">
-                        {t.number}. {t.name}
+                        {t.name}
                       </h3>
 
                       <p className="mt-3 text-xs sm:text-[13px] text-white/85 leading-relaxed font-sans font-medium">
@@ -587,7 +587,7 @@ function Thesis() {
                     {/* Title & Tagline Quote */}
                     <div className="mt-6 sm:mt-7">
                       <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-neutral-950 leading-[1.05]">
-                        {theme.number}. {theme.name}
+                        {theme.name}
                       </h2>
                       <div className="mt-4 p-4 sm:p-5 rounded-2xl bg-white/80 border border-black/[0.07] shadow-2xs">
                         <p className="font-mono text-xs sm:text-[13px] text-neutral-800 leading-relaxed font-semibold">

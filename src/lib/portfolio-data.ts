@@ -134,6 +134,7 @@ export type Company = {
   logo: string;
   whiteLogo?: string;
   image?: string;
+  imagePosition?: string;
   featured?: boolean;
   fund?: "Growth Fund" | "Micro Fund" | "Both";
   website?: string;
@@ -512,8 +513,8 @@ export const companies: Company[] = [
     website: "https://convegenius.com",
     socials: {
       website: "https://convegenius.com",
-      instagram: "https://www.instagram.com/convegenius/",
-      youtube: "https://www.youtube.com/@convegenius",
+      instagram: "https://www.instagram.com/convegenius.ai/",
+      youtube: "https://www.youtube.com/@ConveGeniusforLearning/featured",
       linkedin: "https://www.linkedin.com/company/convegenius/",
       twitter: "https://x.com/convegenius",
     },
@@ -799,9 +800,9 @@ export const companies: Company[] = [
     website: "https://sproboticworks.com",
     socials: {
       website: "https://sproboticworks.com",
-      instagram: "https://www.instagram.com/sproboticworks/",
+      instagram: "https://www.instagram.com/sp_robotic_works/?hl=en",
       youtube: "https://www.youtube.com/@SPRoboticWorks",
-      linkedin: "https://www.linkedin.com/company/sp-robotic-works/",
+      linkedin: "https://www.linkedin.com/company/sp-robotic-works-pvt-ltd-/",
       twitter: "https://x.com/sproboticworks",
     },
   },
@@ -860,6 +861,7 @@ export const companies: Company[] = [
     logo: internshalaLogo,
     whiteLogo: internshalaWhiteLogo,
     image: internshalaImg,
+    imagePosition: "object-top",
     website: "https://internshala.com",
     socials: {
       website: "https://internshala.com",
@@ -951,8 +953,8 @@ export const companies: Company[] = [
       "FreshToHome is India & UAE's leading D2C fish & meat platform, delivering fresh, chemical-free seafood, meat, and ready-to-cook products directly to consumers. It operates a farm-to-fork supply chain with direct sourcing from fishermen and farmers, quality checks, and no added chemical preservatives, supported by technology for procurement and demand forecasting. The company serves households across India and the UAE. Direct sourcing, traceability, and preservative-free positioning differentiate it within the fresh food e-commerce category.",
     founders: "Shan Kadavil · Mathew Joseph",
     founderLinkedins: {
-      "Shan Kadavil": "https://www.linkedin.com/in/shan-kadavil/",
-      "Mathew Joseph": "https://www.linkedin.com/in/mathew-joseph-freshtohome/",
+      "Shan Kadavil": "https://www.linkedin.com/in/shankadavil/",
+      "Mathew Joseph": "https://www.linkedin.com/in/mathewjosephfth/",
     },
     problem:
       "Traditional wet markets rely on multiple middlemen and chemical preservatives. Urban consumers lacked a dependable, clean, farm-to-doorstep alternative.",

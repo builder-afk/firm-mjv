@@ -22,6 +22,32 @@ import hexalogFounder from "@/assets/founders/Hexalog Reliability Quote Poster.p
 import extramileFounder from "@/assets/founders/extramile.png";
 import vivekFounder from "@/assets/portfolio/vivek.jpg";
 
+import ankitKumarImg from "@/assets/perspectives/AnkitKumar.jpg";
+import deepanshuImg from "@/assets/perspectives/Deepanshu.png";
+import vikramImg from "@/assets/perspectives/Vikram.png";
+import anuragImg from "@/assets/perspectives/anurag.jpeg";
+import atulImg from "@/assets/perspectives/atul.jpeg";
+import chandanImg from "@/assets/perspectives/chandan.png";
+import dibyanshuImg from "@/assets/perspectives/dibyanshu.jpeg";
+import eshanImg from "@/assets/perspectives/eshan.png";
+import hiteshImg from "@/assets/perspectives/hitesh.jpg";
+import jairajImg from "@/assets/perspectives/jairaj.jpeg";
+import kiranImg from "@/assets/perspectives/kiran.jpeg";
+import kshitijImg from "@/assets/perspectives/kshitij.jpeg";
+import mathewImg from "@/assets/perspectives/mathew.jpeg";
+import mayankImg from "@/assets/perspectives/mayank.jpeg";
+import pankajImg from "@/assets/perspectives/pankaj.jpeg";
+import prasadImg from "@/assets/perspectives/prasad.jpg";
+import ronnieImg from "@/assets/perspectives/ronnie.jpg";
+import shanImg from "@/assets/perspectives/shan.jpeg";
+import shashankImg from "@/assets/perspectives/shashank.jpeg";
+import shobhitImg from "@/assets/perspectives/shobhit.jpeg";
+import sirajImg from "@/assets/perspectives/siraj.jpg";
+import snehaImg from "@/assets/perspectives/sneha.jpeg";
+import sudarshanImg from "@/assets/perspectives/sudarshan.jpeg";
+import utkarshImg from "@/assets/perspectives/utkarsh.png";
+import vineetImg from "@/assets/perspectives/vineet.jpeg";
+
 import skyeAirLogo from "@/assets/logos/skye-air.webp";
 import basecareLogo from "@/assets/logos/4basecare.webp";
 import staquLogo from "@/assets/logos/staqu.webp";
@@ -103,10 +129,10 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Ankit Kumar",
         role: "Co-founder & CEO",
-        image: skyeAirFounder,
+        image: ankitKumarImg,
       },
     ],
-    founderImage: skyeAirFounder,
+    founderImage: ankitKumarImg,
     logo: skyeAirLogo,
   },
   {
@@ -130,25 +156,25 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Dibyanshu Tripathi",
         role: "Co-Founder",
-        image: hexalogFounder,
+        image: dibyanshuImg,
       },
       {
         name: "Utkarsh Tripathi",
         role: "Co-Founder",
-        image: hexalogFounder,
+        image: utkarshImg,
       },
       {
         name: "Vineet Malik",
         role: "Co-Founder",
-        image: hexalogFounder,
+        image: vineetImg,
       },
       {
         name: "Shobhit Singh",
         role: "Co-Founder",
-        image: hexalogFounder,
+        image: shobhitImg,
       },
     ],
-    founderImage: hexalogFounder,
+    founderImage: dibyanshuImg,
     logo: hexalogLogo,
   },
 
@@ -174,15 +200,15 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Hitesh Goswami",
         role: "Co-Founder & CEO",
-        image: basecareFounder,
+        image: hiteshImg,
       },
       {
         name: "Kshitij Rishi",
         role: "Co-Founder & COO",
-        image: basecareFounder,
+        image: kshitijImg,
       },
     ],
-    founderImage: basecareFounder,
+    founderImage: hiteshImg,
     logo: basecareLogo,
   },
   {
@@ -206,10 +232,10 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Sudarshan Gangrade",
         role: "Founder & CEO",
-        image: loFoodsFounder,
+        image: sudarshanImg,
       },
     ],
-    founderImage: loFoodsFounder,
+    founderImage: sudarshanImg,
     logo: loFoodsLogo,
   },
   {
@@ -233,7 +259,7 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Siraj Dhanani",
         role: "Founder & CEO",
-        image: innaccelFounder,
+        image: sirajImg,
       },
       {
         name: "Nitesh Kumar Jangir",
@@ -241,7 +267,7 @@ export const perspectivesData: PerspectiveStory[] = [
         image: innaccelFounder,
       },
     ],
-    founderImage: innaccelFounder,
+    founderImage: sirajImg,
     logo: innaccelLogo,
   },
 
@@ -267,20 +293,20 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Atul Rai",
         role: "Co-Founder & CEO",
-        image: staquFounder,
+        image: atulImg,
       },
       {
         name: "Anurag Saini",
         role: "Co-Founder & CTO",
-        image: staquFounder,
+        image: anuragImg,
       },
       {
         name: "Pankaj Sharma",
         role: "Co-Founder",
-        image: staquFounder,
+        image: pankajImg,
       },
     ],
-    founderImage: staquFounder,
+    founderImage: atulImg,
     logo: staquLogo,
   },
   {
@@ -304,15 +330,15 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Kiran Ramakrishna",
         role: "Co-Founder & CEO",
-        image: rubickaiFounder,
+        image: kiranImg,
       },
       {
         name: "Chandan Mishra",
         role: "Co-Founder & CPO",
-        image: rubickaiFounder,
+        image: chandanImg,
       },
     ],
-    founderImage: rubickaiFounder,
+    founderImage: kiranImg,
     logo: rubickaiLogo,
   },
 
@@ -365,15 +391,15 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Shan Kadavil",
         role: "Co-Founder & CEO",
-        image: freshtohomeFounder,
+        image: shanImg,
       },
       {
         name: "Mathew Joseph",
         role: "Co-Founder & COO",
-        image: freshtohomeFounder,
+        image: mathewImg,
       },
     ],
-    founderImage: freshtohomeFounder,
+    founderImage: shanImg,
     logo: freshtohomeLogo,
   },
   {
@@ -386,26 +412,27 @@ export const perspectivesData: PerspectiveStory[] = [
     year: "2022",
     founder: "Vikram Sharma · Deepanshu Goel, Co-Founders",
     rationale:
-      "Hyperlocal commerce only works when the founder has lived its messy realities. The Wiffy team has — their trust-first product instincts, willingness to grow neighborhood by neighborhood, and refusal to force-fit a mass-market playbook is what earned our early conviction. Instead of chasing top-down growth, they've built a community fabric that residents actually rely on — and that patience creates the kind of defensibility hyperlocal has struggled to find for a decade. We're backing a team building the invisible commerce layer of the Indian neighborhood, one street at a time.",
+      "Hyperlocal commerce only works when the founder has lived its messy realities. The Wiffy team has — their trust-first product instincts, willingness to grow neighborhood by neighborhood, and refusal to force-fit a mass-market playbook is what earned our early conviction. Instead of chasing top-down growth, they've built a community fabric that residents actually rely on — and that patience creates the kind of defensibility hyperlocal has struggled to find for a decade. We're backing a team building the invisible commerce layer of the Indian neighborhood, one street at a time. Wiffy was featured on Meet the Drapers (a global startup pitch platform), where CEO Mr. Vikram Sharma met Tim Draper himself.",
     pillars: [
       "Street-by-street hyperlocal network density",
       "Trust-first neighborhood community fabric",
       "Unit economics built without subsidized burn",
       "Defensible ground-truth merchant relationships",
+      "Featured on Meet the Drapers; CEO met Tim Draper",
     ],
     founders: [
       {
         name: "Vikram Sharma",
         role: "Co-Founder & CEO",
-        image: wiffyFounder,
+        image: vikramImg,
       },
       {
         name: "Deepanshu Goel",
         role: "Co-Founder & CTO",
-        image: wiffyFounder,
+        image: deepanshuImg,
       },
     ],
-    founderImage: wiffyFounder,
+    founderImage: vikramImg,
     logo: wiffyLogo,
   },
   {
@@ -485,15 +512,15 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Jairaj Bhattacharya",
         role: "Co-Founder & MD",
-        image: convegeniusFounder,
+        image: jairajImg,
       },
       {
         name: "Shashank Pandey",
         role: "Co-Founder & President",
-        image: convegeniusFounder,
+        image: shashankImg,
       },
     ],
-    founderImage: convegeniusFounder,
+    founderImage: jairajImg,
     logo: convegeniusLogo,
   },
   {
@@ -517,7 +544,7 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Sneha Priya",
         role: "Co-Founder & CEO",
-        image: sprwFounder,
+        image: snehaImg,
       },
       {
         name: "Pranavan Sankar",
@@ -525,7 +552,7 @@ export const perspectivesData: PerspectiveStory[] = [
         image: sprwFounder,
       },
     ],
-    founderImage: sprwFounder,
+    founderImage: snehaImg,
     logo: sprwLogo,
   },
   {
@@ -576,15 +603,15 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Ronnie Screwvala",
         role: "Co-Founder & Chairperson",
-        image: upgradFounder,
+        image: ronnieImg,
       },
       {
         name: "Mayank Kumar",
         role: "Co-Founder & MD",
-        image: upgradFounder,
+        image: mayankImg,
       },
     ],
-    founderImage: upgradFounder,
+    founderImage: ronnieImg,
     logo: upgradLogo,
   },
   {
@@ -608,10 +635,10 @@ export const perspectivesData: PerspectiveStory[] = [
       {
         name: "Prasad Ram",
         role: "Founder & CEO",
-        image: gooruFounder,
+        image: prasadImg,
       },
     ],
-    founderImage: gooruFounder,
+    founderImage: prasadImg,
     logo: gooruLogo,
   },
 
@@ -1084,14 +1111,14 @@ export function PerspectivesPage() {
                       {item.founders.map((founder, fIdx) => (
                         <div
                           key={fIdx}
-                          className="w-[calc(50%-10px)] sm:w-[200px] md:w-[220px] group shrink-0"
+                          className="w-[calc(50%-10px)] sm:w-[160px] md:w-[180px] group shrink-0 text-center"
                         >
-                          <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 border border-neutral-200/80 mb-3 relative shadow-2xs group-hover:border-neutral-300 transition-colors">
+                          <div className="aspect-square w-full rounded-full overflow-hidden bg-neutral-100 border-2 border-neutral-200/90 mb-3 relative shadow-xs group-hover:border-neutral-900 transition-colors">
                             <img
                               src={founder.image}
                               alt={founder.name}
-                              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                               loading="lazy"
+                              className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${item.id === "internshala" ? "object-cover object-top" : "object-cover object-top"}`}
                             />
                           </div>
                           <div className="font-display font-bold text-base sm:text-lg text-neutral-950 leading-snug">

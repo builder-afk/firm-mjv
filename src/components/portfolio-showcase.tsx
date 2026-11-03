@@ -239,7 +239,7 @@ export function CategoryLeadersGrid() {
                   src={item.photo}
                   alt={item.founderName}
                   loading="lazy"
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${item.slug === "internshala" ? "object-cover object-top" : "object-cover object-top"}`}
                 />
 
                 {/* 2-Tier Name & Role Badge pinned to bottom-left */}

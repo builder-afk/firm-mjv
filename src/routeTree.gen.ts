@@ -16,6 +16,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FundsRouteImport } from './routes/funds'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as PerspectiveRouteImport } from './routes/perspective'
+import { Route as PerspectivesRouteImport } from './routes/perspectives'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -57,6 +58,11 @@ const MediaRoute = MediaRouteImport.update({
 const PerspectiveRoute = PerspectiveRouteImport.update({
   id: '/perspective',
   path: '/perspective',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerspectivesRoute = PerspectivesRouteImport.update({
+  id: '/perspectives',
+  path: '/perspectives',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioRoute = PortfolioRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/funds': typeof FundsRoute
   '/media': typeof MediaRoute
   '/perspective': typeof PerspectiveRoute
+  '/perspectives': typeof PerspectivesRoute
   '/portfolio': typeof PortfolioRouteWithChildren
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/funds': typeof FundsRoute
   '/media': typeof MediaRoute
   '/perspective': typeof PerspectiveRoute
+  '/perspectives': typeof PerspectivesRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/team': typeof TeamRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/funds': typeof FundsRoute
   '/media': typeof MediaRoute
   '/perspective': typeof PerspectiveRoute
+  '/perspectives': typeof PerspectivesRoute
   '/portfolio': typeof PortfolioRouteWithChildren
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/funds'
     | '/media'
     | '/perspective'
+    | '/perspectives'
     | '/portfolio'
     | '/resources'
     | '/sitemap.xml'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/funds'
     | '/media'
     | '/perspective'
+    | '/perspectives'
     | '/resources'
     | '/sitemap.xml'
     | '/team'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/funds'
     | '/media'
     | '/perspective'
+    | '/perspectives'
     | '/portfolio'
     | '/resources'
     | '/sitemap.xml'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   FundsRoute: typeof FundsRoute
   MediaRoute: typeof MediaRoute
   PerspectiveRoute: typeof PerspectiveRoute
+  PerspectivesRoute: typeof PerspectivesRoute
   PortfolioRoute: typeof PortfolioRouteWithChildren
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       path: '/perspective'
       fullPath: '/perspective'
       preLoaderRoute: typeof PerspectiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perspectives': {
+      id: '/perspectives'
+      path: '/perspectives'
+      fullPath: '/perspectives'
+      preLoaderRoute: typeof PerspectivesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio': {
@@ -333,6 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   FundsRoute: FundsRoute,
   MediaRoute: MediaRoute,
   PerspectiveRoute: PerspectiveRoute,
+  PerspectivesRoute: PerspectivesRoute,
   PortfolioRoute: PortfolioRouteWithChildren,
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
