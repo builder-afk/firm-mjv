@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Linkedin } from "lucide-react";
+import { companies } from "@/lib/portfolio-data";
 
 import skyeAirFounder from "@/assets/founders/skyeair.jpeg";
 import basecareFounder from "@/assets/founders/4basecare.jpeg";
@@ -20,7 +21,6 @@ import thimblerrFounder from "@/assets/portfolio/thimblerr.jpg";
 import boinggFounder from "@/assets/portfolio/boingg.jpg";
 import hexalogFounder from "@/assets/founders/Hexalog Reliability Quote Poster.png";
 import extramileFounder from "@/assets/founders/extramile.png";
-import vivekFounder from "@/assets/portfolio/vivek.jpg";
 
 import ankitKumarImg from "@/assets/perspectives/AnkitKumar.jpg";
 import deepanshuImg from "@/assets/perspectives/Deepanshu.png";
@@ -66,6 +66,13 @@ import thimblerrLogo from "@/assets/logos/thimblerr.webp";
 import boinggLogo from "@/assets/logos/boingg.webp";
 import hexalogLogo from "@/assets/logos/hexalog.webp";
 import extramileLogo from "@/assets/logos/extramile.webp";
+import freshleafLogo from "@/assets/logos/freshleaf.png";
+import sandowitchLogo from "@/assets/logos/sandowitch_logo.jpeg";
+import flawsomeLogo from "@/assets/logos/flawsome_xleap_care_logo.jpeg";
+import balkiratImg from "@/assets/founders/balkirat.png";
+import muneetImg from "@/assets/founders/muneet.jpeg";
+import vivekPrabhakarImg from "@/assets/founders/vivekprabhakar.jpeg";
+import ranukImg from "@/assets/founders/ranuk.webp";
 
 export const Route = createFileRoute("/perspective")({
   head: () => ({
@@ -88,6 +95,25 @@ export interface FounderProfile {
   name: string;
   role: string;
   image: string;
+  linkedin?: string;
+}
+
+export function getFounderLinkedIn(companySlug: string, founderName: string, directUrl?: string): string {
+  if (directUrl) return directUrl;
+  const company = companies.find((c) => c.slug === companySlug);
+  if (company?.founderLinkedins?.[founderName]) {
+    return company.founderLinkedins[founderName];
+  }
+  if (company?.founderLinkedins) {
+    const key = Object.keys(company.founderLinkedins).find(
+      (k) =>
+        k.toLowerCase().includes(founderName.toLowerCase()) ||
+        founderName.toLowerCase().includes(k.toLowerCase())
+    );
+    if (key) return company.founderLinkedins[key];
+  }
+  const query = encodeURIComponent(`${founderName} ${company?.name || ""}`);
+  return `https://www.linkedin.com/search/results/people/?keywords=${query}`;
 }
 
 export interface PerspectiveStory {
@@ -489,11 +515,94 @@ export const perspectivesData: PerspectiveStory[] = [
     founderImage: extramileFounder,
     logo: extramileLogo,
   },
+  {
+    id: "freshleaf-tea",
+    number: "13",
+    company: "Freshleaf Tea",
+    slug: "freshleaf-tea",
+    title: "Why we invested in Freshleaf Tea",
+    sector: "Consumer",
+    year: "2027",
+    founder: "Balkirat Singh & Muneet Arora, Co-Founders",
+    rationale:
+      "Tea is India's most ubiquitous beverage category, yet the specialty whole-leaf transformation is where coffee was ten years ago. The Freshleaf team built direct estate-level origin partnerships that compress procurement lead-times while preserving volatile aromatics. Their unit economics, direct-to-consumer velocity, and margin structure demonstrated strong founder discipline from inception.",
+    pillars: [
+      "Direct estate-to-pack sourcing pipeline preserving volatile oils and polyphenols",
+      "Robust gross margins powered by premium single-origin positioning",
+      "High repeat cohort retention across subscription and modern trade channels",
+    ],
+    founders: [
+      {
+        name: "Balkirat Singh",
+        role: "Co-Founder",
+        image: balkiratImg,
+      },
+      {
+        name: "Muneet Arora",
+        role: "Co-Founder",
+        image: muneetImg,
+      },
+    ],
+    founderImage: balkiratImg,
+    logo: freshleafLogo,
+  },
+  {
+    id: "sandowitch",
+    number: "14",
+    company: "Sandowitch",
+    slug: "sandowitch",
+    title: "Why we invested in Sandowitch",
+    sector: "Consumer / F&B",
+    year: "2027",
+    founder: "Vivek Prabhakar, Founder",
+    rationale:
+      "QSR brands in India often struggle with kitchen footprint costs and consistent kitchen execution. Sandowitch cracked the commissary-first model: complex sauces, sous-vide proteins, and breads are standardized centrally, enabling micro-footprint front-of-house assembly in under 90 seconds. The brand's customer loyalty, capital-efficient store payback, and unit economics represent the exact operational prudence we seek.",
+    pillars: [
+      "Proprietary commissary hub model keeping outlet CAPEX and labor footprint exceptionally lean",
+      "Sub-2-minute order fulfillment driving high peak-hour throughput in prime commercial hubs",
+      "Over 40% monthly cohort repeat rate underpinned by nutritional transparency",
+    ],
+    founders: [
+      {
+        name: "Vivek Prabhakar",
+        role: "Founder",
+        image: vivekPrabhakarImg,
+      },
+    ],
+    founderImage: vivekPrabhakarImg,
+    logo: sandowitchLogo,
+  },
+  {
+    id: "flawsome",
+    number: "15",
+    company: "Flawsome",
+    slug: "flawsome",
+    title: "Why we invested in Flawsome",
+    sector: "Consumer / FemCare",
+    year: "2027",
+    founder: "Ranu Khade, Founder",
+    rationale:
+      "Modern Indian consumers increasingly examine ingredient decks and demand genuine efficacy rather than marketing hyperbole. Flawsome has built a remarkably authentic community-led brand with exceptional organic word-of-mouth. Their disciplined product development cycle, strong gross margins, and low customer acquisition costs gave us conviction in their ability to build an enduring personal care leader.",
+    pillars: [
+      "Barrier-first dermatological formulations engineered for high humidity and pollution stressors",
+      "Direct-to-consumer gross margins exceeding 70% with strong basket sizes",
+      "Organic community engagement driving exceptional customer lifetime value to CAC ratios",
+    ],
+    founders: [
+      {
+        name: "Ranu Khade",
+        role: "Founder",
+        image: ranukImg,
+      },
+    ],
+    founderImage: ranukImg,
+    logo: flawsomeLogo,
+  },
 
   // ── 5. EDTECH ──
   {
     id: "convegenius",
-    number: "13",
+    number: "16",
     company: "ConveGenius",
     slug: "convegenius",
     title: "Why we invested in ConveGenius",
@@ -525,7 +634,7 @@ export const perspectivesData: PerspectiveStory[] = [
   },
   {
     id: "sp-robotic-works",
-    number: "14",
+    number: "17",
     company: "SP Robotic Works",
     slug: "sp-robotic-works",
     title: "Why we invested in SP Robotic Works",
@@ -557,7 +666,7 @@ export const perspectivesData: PerspectiveStory[] = [
   },
   {
     id: "internshala",
-    number: "15",
+    number: "18",
     company: "Internshala",
     slug: "internshala",
     title: "Why we invested in Internshala",
@@ -584,7 +693,7 @@ export const perspectivesData: PerspectiveStory[] = [
   },
   {
     id: "upgrad",
-    number: "16",
+    number: "19",
     company: "upGrad",
     slug: "upgrad",
     title: "Why we invested in upGrad",
@@ -616,7 +725,7 @@ export const perspectivesData: PerspectiveStory[] = [
   },
   {
     id: "gooru",
-    number: "17",
+    number: "20",
     company: "Gooru",
     slug: "gooru",
     title: "Why we invested in Gooru",
@@ -645,7 +754,7 @@ export const perspectivesData: PerspectiveStory[] = [
   // ── 6. B2B & SAAS ──
   {
     id: "thimblerr",
-    number: "18",
+    number: "21",
     company: "Thimblerr",
     slug: "thimblerr",
     title: "Why we invested in Thimblerr",
@@ -702,7 +811,7 @@ export const perspectiveCategories: CategoryNav[] = [
     id: "consumer",
     name: "Consumer",
     leadCompanyId: "dil-foods",
-    companyIds: ["dil-foods", "freshtohome", "wiffy", "boingg", "extramile"],
+    companyIds: ["dil-foods", "freshtohome", "wiffy", "boingg", "extramile", "freshleaf-tea", "sandowitch", "flawsome"],
   },
   {
     id: "edtech",
@@ -774,6 +883,16 @@ export function PerspectivesPage() {
       if (isClickScrolling.current) return;
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          // If scrolled to the bottom of the page, activate the last company
+          const isAtBottom =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 60;
+          if (isAtBottom) {
+            setActiveId(perspectivesData[perspectivesData.length - 1].id);
+            ticking = false;
+            return;
+          }
+
           const triggerY = window.innerHeight * 0.35;
           let current = perspectivesData[0].id;
 
@@ -1069,7 +1188,7 @@ export function PerspectivesPage() {
                     <div className="md:col-span-5 bg-neutral-50/80 rounded-2xl p-5 sm:p-6 border border-neutral-200/80">
                       <div className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3.5 pb-2 border-b border-neutral-200 flex items-center justify-between">
                         <span>Underwriting Pillars</span>
-                        <span className="text-[#036089] font-mono font-bold">0{idx + 1}</span>
+                        <span className="text-[#036089] font-mono font-bold">{item.number}</span>
                       </div>
 
                       <ul className="space-y-3 font-sans text-xs sm:text-sm text-neutral-700">
@@ -1108,27 +1227,45 @@ export function PerspectivesPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-5 sm:gap-6 items-start">
-                      {item.founders.map((founder, fIdx) => (
-                        <div
-                          key={fIdx}
-                          className="w-[calc(50%-10px)] sm:w-[160px] md:w-[180px] group shrink-0 text-center"
-                        >
-                          <div className="aspect-square w-full rounded-full overflow-hidden bg-neutral-100 border-2 border-neutral-200/90 mb-3 relative shadow-xs group-hover:border-neutral-900 transition-colors">
-                            <img
-                              src={founder.image}
-                              alt={founder.name}
-                              loading="lazy"
-                              className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${item.id === "internshala" ? "object-cover object-top" : "object-cover object-top"}`}
-                            />
-                          </div>
-                          <div className="font-display font-bold text-base sm:text-lg text-neutral-950 leading-snug">
-                            {founder.name}
-                          </div>
-                          <div className="font-mono text-xs text-neutral-500 mt-0.5">
-                            {founder.role}
-                          </div>
-                        </div>
-                      ))}
+                      {item.founders.map((founder, fIdx) => {
+                        const linkedinUrl = getFounderLinkedIn(item.slug, founder.name, founder.linkedin);
+                        return (
+                          <a
+                            key={fIdx}
+                            href={linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${founder.name} LinkedIn Profile`}
+                            className="w-[calc(50%-10px)] sm:w-[160px] md:w-[180px] group shrink-0 text-center block cursor-pointer"
+                          >
+                            <div className="aspect-square w-full rounded-full overflow-hidden bg-neutral-100 border-2 border-neutral-200/90 mb-3 relative shadow-xs group-hover:border-[#036089] group-hover:shadow-md transition-all duration-300">
+                              <img
+                                src={founder.image}
+                                alt={founder.name}
+                                loading="lazy"
+                                className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                                  item.id === "internshala"
+                                    ? "object-cover object-top"
+                                    : item.id === "boingg"
+                                      ? "object-cover object-[center_25%]"
+                                      : "object-cover object-center"
+                                }`}
+                              />
+                            </div>
+                            <div className="font-display font-bold text-base sm:text-lg text-neutral-950 leading-snug group-hover:text-[#036089] transition-colors inline-flex items-center justify-center gap-1">
+                              <span>{founder.name}</span>
+                              <ArrowUpRight className="w-3.5 h-3.5 text-[#036089] opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 transition-all shrink-0" />
+                            </div>
+                            <div className="font-mono text-xs text-neutral-500 mt-0.5">
+                              {founder.role}
+                            </div>
+                            <div className="mt-1.5 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-neutral-400 group-hover:text-[#036089] transition-colors font-semibold">
+                              <Linkedin className="w-3 h-3 fill-current" />
+                              <span>LinkedIn</span>
+                            </div>
+                          </a>
+                        );
+                      })}
                     </div>
                   </div>
                 </article>

@@ -28,7 +28,7 @@ export function HomeHero() {
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[40px] xl:text-[48px] font-black tracking-[-0.03em] text-neutral-950 leading-[1.08] select-none">
               Backing visionary founders
               <br />
-              building <span className="text-[#036089] whitespace-nowrap">&ldquo;new India&rdquo;</span>
+              building <span className="text-[#036089] whitespace-nowrap">new India</span>
             </h1>
           </div>
 
@@ -55,6 +55,20 @@ export function HomeHero() {
         {/* Top white gradient to seamlessly connect header to mountain peaks */}
         <div className="absolute inset-x-0 top-0 h-20 sm:h-28 lg:h-36 bg-gradient-to-b from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
+        {/* ── Top Investment Tenets Ribbon Over Background Mountain ── */}
+        <div className="absolute inset-x-0 top-5 sm:top-7 lg:top-9 z-20 flex justify-center">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 px-4 sm:px-8 max-w-[1280px]">
+            {HERO_TAGS.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border-2 border-transparent bg-white/95 backdrop-blur-md px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-900 shadow-xs hover:border-[#036089] hover:bg-[#036089] hover:text-white transition-all duration-200 cursor-default"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* Mountain Image: peaks.png spanning 100% width with no side padding */}
         <div className="relative w-full overflow-hidden">
           <img
@@ -77,20 +91,6 @@ export function HomeHero() {
 
         {/* Bottom white gradient so clouds dissolve into white page */}
         <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 lg:h-36 bg-gradient-to-t from-white via-white/70 to-transparent z-10 pointer-events-none" />
-      </div>
-
-      {/* ───────────── INVESTMENT TENETS RIBBON ───────────── */}
-      <div className="relative z-20 -mt-8 sm:-mt-12 pb-10 sm:pb-14">
-        <div className="flex flex-wrap items-center justify-center gap-2.5 px-4 sm:px-8">
-          {HERO_TAGS.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border-2 border-transparent bg-white px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-900 shadow-xs hover:border-[#036089] hover:bg-[#036089] hover:text-white transition-all duration-200 cursor-default"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
     </section>
   );

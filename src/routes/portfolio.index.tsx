@@ -6,9 +6,15 @@ import {
   ArrowLeft,
   ArrowRight,
   Grid3X3,
+  List,
   Table2,
   X,
   Building2,
+  MapPin,
+  Tag,
+  Zap,
+  Users,
+  Calendar,
 } from "lucide-react";
 import { useState, useMemo, useRef } from "react";
 
@@ -37,6 +43,34 @@ export const Route = createFileRoute("/portfolio/")({
 
 type FundFilter = "ALL" | "MJIGF" | "MJIMF";
 type Company = (typeof companies)[number];
+
+const COMPANY_LOCATIONS: Record<string, string> = {
+  "skye-air": "Gurugram",
+  "4basecare": "Bengaluru",
+  "staqu": "Gurugram",
+  "dil-foods": "Bengaluru",
+  "convegenius": "Noida",
+  "protein-chef": "Bengaluru",
+  "innaccel": "Bengaluru",
+  "rubickai": "Bengaluru",
+  "sp-robotic-works": "Chennai",
+  "internshala": "Gurugram",
+  "upgrad": "Mumbai",
+  "freshtohome": "Bengaluru",
+  "wiffy": "Delhi NCR",
+  "gooru": "Bengaluru",
+  "thimblerr": "Mumbai",
+  "boingg": "Gurugram",
+  "hexalog": "Bengaluru",
+  "extramile": "Mumbai",
+  "freshleaf-tea": "Ludhiana",
+  "sandowitch": "Bengaluru",
+  "flawsome": "Indore",
+};
+
+function getCompanyLocation(slug: string): string {
+  return COMPANY_LOCATIONS[slug] || "India";
+}
 
 function getFundBadge(fund?: "Growth Fund" | "Micro Fund" | "Both"): string {
   if (fund === "Both") return "MJIMF & MJIGF";
@@ -140,7 +174,7 @@ export default function PortfolioIndex() {
     return Array.from(set).sort();
   }, []);
 
-  // Filtered companies
+  // Filtered companies (sorted newest to oldest by year)
   const filteredCompanies = useMemo(() => {
     return companies.filter((c) => {
       if (!matchesFund(c, activeFund)) return false;
@@ -170,7 +204,7 @@ export default function PortfolioIndex() {
         }
       }
       return true;
-    });
+    }).sort((a, b) => b.year - a.year);
   }, [activeFund, selectedSector, searchQuery]);
 
   const currentMeta = FUND_META[activeFund];
@@ -179,137 +213,23 @@ export default function PortfolioIndex() {
     <div className="bg-[var(--paper)] text-[var(--ink)] min-h-screen selection:bg-neutral-900 selection:text-white">
 
       {/* ── 2. FEATURED BRAND RAIL / CAROUSEL (DIRECTLY INSPIRED BY SPRING SCREENSHOT 2) ── */}
-      <section className="py-14 sm:py-20 border-b border-black/10 bg-white">
-        <div className="container-tight mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <h2 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-950">
-              All companies we have invested in
-            </h2>
-          </div>
 
-          {/* Carousel Arrows (←) (→) */}
-          <div className="flex items-center gap-3 self-start sm:self-auto">
-            <button
-              type="button"
-              onClick={() => scrollCarousel("left")}
-              aria-label="Scroll left"
-              className="w-11 h-11 rounded-full border-2 border-neutral-900 bg-white text-neutral-900 flex items-center justify-center hover:bg-neutral-900 hover:text-white transition-all shadow-2xs active:scale-95"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollCarousel("right")}
-              aria-label="Scroll right"
-              className="w-11 h-11 rounded-full border-2 border-neutral-900 bg-white text-neutral-900 flex items-center justify-center hover:bg-neutral-900 hover:text-white transition-all shadow-2xs active:scale-95"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Scrollable Track */}
-        <div
-          ref={carouselRef}
-          className="flex gap-6 overflow-x-auto px-4 sm:px-8 lg:px-12 pb-6 scrollbar-none snap-x snap-mandatory scroll-smooth"
-        >
-          {/* Featured Company Cards (Square / Framed with Rich Product Images) */}
-          {companies.map((company) => {
-            const fundBadge = getFundBadge(company.fund);
-
-            return (
-              <Link
-                key={`carousel-${company.slug}`}
-                to="/portfolio/$slug"
-                params={{ slug: company.slug }}
-                className="group min-w-[280px] sm:min-w-[320px] md:min-w-[340px] max-w-[340px] aspect-square rounded-2xl border-2 border-neutral-950 bg-white flex flex-col justify-between shrink-0 snap-start overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300"
-              >
-                {/* 1. Large Crisp Brand/Product Visual (70% Height) */}
-                <div className="relative h-[68%] w-full overflow-hidden bg-neutral-100">
-                  {company.image ? (
-                    <img
-                      src={company.image}
-                      alt={`${company.name} product`}
-                      loading="lazy"
-                      className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-108"
-                    />
-                  ) : (
-                    <div className="h-full w-full flex items-center justify-center bg-neutral-900">
-                      <img
-                        src={company.whiteLogo || company.logo}
-                        alt={`${company.name} logo`}
-                        className="max-h-12 w-auto object-contain"
-                      />
-                    </div>
-                  )}
-
-                  {/* Top Badges */}
-                  <div className="absolute inset-x-0 top-0 p-3.5 flex items-center justify-between z-10 pointer-events-none">
-                    <span className="inline-flex items-center rounded-full bg-neutral-950/85 backdrop-blur-md px-2.5 py-0.5 font-mono text-[9px] font-black uppercase tracking-wider text-white border border-white/20">
-                      {fundBadge}
-                    </span>
-
-                    <span className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md text-neutral-950 flex items-center justify-center shadow-xs group-hover:bg-neutral-950 group-hover:text-white transition-colors">
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </span>
-                  </div>
-
-                  {/* Subtle Gradient Over Product */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 opacity-60 group-hover:opacity-30 transition-opacity" />
-                </div>
-
-                {/* 2. Brand Card Bottom Area (Exact Match to Spring: Bold Name + Invested in Year ■ Fund) */}
-                <div className="h-[32%] p-5 sm:p-5.5 flex flex-col justify-between bg-white border-t border-neutral-900/10">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight text-neutral-950 truncate group-hover:text-neutral-700 transition-colors">
-                      {company.name}
-                    </h4>
-
-                    {company.logo && (
-                      <img
-                        src={company.logo}
-                        alt=""
-                        className="h-5 w-auto max-w-[80px] object-contain opacity-70 group-hover:opacity-100 transition-opacity"
-                      />
-                    )}
-                  </div>
-
-                  {/* Metadata: Vintage [FYxx] ■ [Fund] */}
-                  <div className="font-mono text-[11px] sm:text-xs text-neutral-600 font-bold flex items-center gap-2 tracking-wide">
-                    <span>{company.vintage ? `Vintage ${company.vintage}` : `Invested in ${company.year}`}</span>
-                    <span className="text-[8px] text-neutral-950">■</span>
-                    <span className="text-neutral-950 truncate">{fundBadge}</span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Scroll Helper Hint */}
-      </section>
 
       {/* ── 3. MODERN BRAND-FIRST CORPORATE UI: COMPLETE DIRECTORY & FILTER ENGINE ── */}
       <section id="portfolio-directory" className="py-14 sm:py-20 md:py-24 bg-[var(--paper)]">
-        <div className="container-tight">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10">
           {/* Section Header */}
-          <div className="pb-8 border-b-2 border-neutral-900/15">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <div>
-                <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-neutral-950">
-                  Portfolio Directory
-                </h2>
-                <p className="mt-3 font-sans text-sm sm:text-base text-neutral-600 max-w-2xl leading-relaxed">
-                  Institutional access to Mount Judi&apos;s active and realized portfolio companies
-                  across healthcare, AI deep-tech, consumer, logistics, and enterprise in India.
-                </p>
-              </div>
+          <div className="pb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">
+                All companies we have invested in
+              </h2>
 
               {/* Fund Vehicle Tabs */}
               <div
                 role="tablist"
                 aria-label="Filter companies by fund vehicle"
-                className="inline-flex flex-wrap items-center gap-1.5 self-start lg:self-end rounded-full border-2 border-neutral-900 bg-white p-1.5 shadow-2xs"
+                className="inline-flex flex-wrap items-center gap-1.5 self-start sm:self-auto rounded-full border-2 border-[#cee7fc] bg-white p-1.5 shadow-2xs transition-colors duration-200"
               >
                 {(["ALL", "MJIGF", "MJIMF"] as FundFilter[]).map((tab) => {
                   const active = tab === activeFund;
@@ -321,14 +241,14 @@ export default function PortfolioIndex() {
                       role="tab"
                       aria-selected={active}
                       onClick={() => setActiveFund(tab)}
-                      className={`relative flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 font-mono text-xs uppercase tracking-wider font-black transition-all duration-200 ${active
-                        ? "bg-neutral-950 text-white shadow-xs"
-                        : "text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100"
+                      className={`relative flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 font-sans text-xs font-semibold transition-all duration-200 ${active
+                        ? "bg-[#0284c7] text-white shadow-xs"
+                        : "text-neutral-700 hover:text-[#0284c7] hover:bg-[#f0f8ff]"
                         }`}
                     >
                       <span>{tab === "ALL" ? "All Vehicles" : tab}</span>
                       <span
-                        className={`rounded-full px-1.5 py-0.5 text-[10px] font-mono leading-none font-bold ${active ? "bg-white text-neutral-950" : "bg-neutral-200 text-neutral-800"
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-sans font-bold leading-none ${active ? "bg-white text-[#0284c7]" : "bg-[#f0f8ff] text-neutral-700"
                           }`}
                       >
                         {count}
@@ -340,231 +260,164 @@ export default function PortfolioIndex() {
             </div>
           </div>
 
-          {/* Active Fund Meta Banner & Quick Controls */}
-          <div className="mt-8 p-5 sm:p-6 rounded-2xl border-2 border-neutral-900 bg-neutral-50/70 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="font-display font-black text-lg uppercase tracking-tight text-neutral-950">
-                  {currentMeta.name}
-                </span>
-                <span className="text-neutral-300">·</span>
-                <span className="font-mono text-xs bg-neutral-900 text-white px-2.5 py-0.5 rounded-full font-bold">
-                  {currentMeta.corpus}
-                </span>
-                <span className="font-mono text-xs text-neutral-700 bg-white border border-neutral-300 px-2.5 py-0.5 rounded-full font-bold">
-                  {filteredCompanies.length} {filteredCompanies.length === 1 ? "Company" : "Companies"}
-                </span>
-              </div>
-              <p className="mt-1.5 font-sans text-xs sm:text-sm text-neutral-600 max-w-2xl">
-                {currentMeta.blurb}
-              </p>
-              <div className="mt-2.5 font-mono text-[11px] text-neutral-900 font-bold flex items-center gap-2">
-                <span className="text-neutral-400">CHECK SIZE:</span>
-                <span>{currentMeta.checkSize}</span>
-              </div>
-            </div>
-
-            {/* Search Box + View Switcher */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              {/* Search */}
-              <div className="relative w-full sm:w-64">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search brands, founders, sector..."
-                  className="w-full pl-9.5 pr-8 py-2.5 rounded-full border-2 border-neutral-900 bg-white text-xs font-sans placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-950 font-medium"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-950"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-
-              {/* View Toggle */}
-              <div className="inline-flex items-center rounded-full border-2 border-neutral-900 bg-white p-1 self-start sm:self-auto">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("grid")}
-                  aria-label="Grid view"
-                  className={`p-2 rounded-full transition-colors ${viewMode === "grid" ? "bg-neutral-950 text-white" : "text-neutral-600 hover:text-neutral-950"
-                    }`}
-                  title="Brand Cards Grid"
-                >
-                  <Grid3X3 className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("ledger")}
-                  aria-label="Table view"
-                  className={`p-2 rounded-full transition-colors ${viewMode === "ledger" ? "bg-neutral-950 text-white" : "text-neutral-600 hover:text-neutral-950"
-                    }`}
-                  title="Corporate Ledger View"
-                >
-                  <Table2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Sector Filter Chips */}
-          <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-            <button
-              type="button"
-              onClick={() => setSelectedSector("ALL")}
-              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase font-bold transition-all ${selectedSector === "ALL"
-                ? "bg-neutral-950 text-white shadow-2xs"
-                : "bg-white border-2 border-neutral-900/15 text-neutral-700 hover:border-neutral-950 hover:text-neutral-950"
-                }`}
-            >
-              All Sectors ({companies.length})
-            </button>
-            {sectors.map((sec) => {
-              const count = companies.filter((c) => c.sector === sec).length;
-              const active = selectedSector === sec;
-              return (
-                <button
-                  key={sec}
-                  type="button"
-                  onClick={() => setSelectedSector(active ? "ALL" : sec)}
-                  className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase font-bold transition-all ${active
-                    ? "bg-neutral-950 text-white shadow-2xs"
-                    : "bg-white border-2 border-neutral-900/15 text-neutral-700 hover:border-neutral-950 hover:text-neutral-950"
-                    }`}
-                >
-                  {sec} ({count})
-                </button>
-              );
-            })}
-          </div>
-
           {/* ── 4A. VIEW MODE: BRAND CARDS GRID ── */}
           {viewMode === "grid" && (
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
               {filteredCompanies.map((company) => {
                 const isExited = company.slug === "internshala" || company.status === "Exited";
                 const fundBadge = getFundBadge(company.fund);
+                const city = getCompanyLocation(company.slug);
 
                 return (
                   <Link
                     key={company.slug}
                     to="/portfolio/$slug"
                     params={{ slug: company.slug }}
-                    className="group relative flex flex-col rounded-2xl border-2 border-neutral-900/15 hover:border-neutral-950 bg-white overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300"
+                    className="group relative flex flex-col rounded-2xl border-2 border-[#cee7fc] bg-neutral-900 overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 aspect-[4/3] sm:aspect-[16/11] min-h-[220px]"
                   >
-                    {/* Upper Product/Brand Image (Editorial Frame) */}
-                    <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-neutral-100">
+                    {/* Full Card Image (Base Visual) */}
+                    <div className="absolute inset-0 w-full h-full overflow-hidden bg-neutral-900">
                       {company.image ? (
                         <img
                           src={company.image}
                           alt={`${company.name} photography`}
                           loading="lazy"
-                          className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-108"
+                          className={`h-full w-full object-cover ${company.imagePosition ||
+                            (company.slug === "internshala" ? "object-top" : company.slug === "boingg" ? "object-[center_25%]" : company.slug === "convegenius" ? "object-[78%_center]" : company.slug === "protein-chef" ? "object-[15%_center]" : "object-center")
+                            } transition-transform duration-700 ease-out group-hover:scale-108`}
                         />
                       ) : (
-                        <div className="h-full w-full flex items-center justify-center bg-neutral-900">
+                        <div className="h-full w-full flex items-center justify-center bg-neutral-900 p-8">
                           <img
                             src={company.whiteLogo || company.logo}
                             alt=""
-                            className="max-h-12 w-auto object-contain"
+                            className="max-h-14 w-auto object-contain"
                           />
                         </div>
                       )}
 
-                      {/* Dark Gradient Overlay for Contrast */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 group-hover:from-black/75 transition-colors" />
+                      {/* Gentle Gradient Scrim for Base Readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/35 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
 
-                      {/* Top Badges */}
-                      <div className="absolute inset-x-0 top-0 p-4 flex items-center justify-between z-10 pointer-events-none">
+                      {/* Top Badges (Visible on Image) */}
+                      <div className="absolute inset-x-0 top-0 p-3 sm:p-3.5 flex items-center justify-between z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-200">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="inline-flex items-center rounded-full bg-neutral-950/85 backdrop-blur-md px-2.5 py-0.5 font-mono text-[9px] font-black uppercase tracking-wider text-white border border-white/20">
+                          <span className="inline-flex items-center rounded-full bg-white/95 backdrop-blur-md px-2 py-0.5 font-sans text-[11px] font-semibold text-[#0284c7] border border-[#cee7fc] shadow-xs">
                             {fundBadge}
                           </span>
                           {isExited && (
-                            <span className="inline-flex items-center rounded-full bg-neutral-900/90 backdrop-blur-md px-2.5 py-0.5 font-mono text-[9px] font-black uppercase tracking-wider text-white border border-white/20">
+                            <span className="inline-flex items-center rounded-full bg-emerald-500/95 backdrop-blur-md px-2 py-0.5 font-sans text-[11px] font-semibold text-white shadow-xs">
                               M&amp;A Exit
                             </span>
                           )}
                         </div>
 
-                        <span className="w-8 h-8 rounded-full bg-white text-neutral-950 flex items-center justify-center shadow-xs group-hover:scale-110 group-hover:bg-neutral-950 group-hover:text-white transition-all">
-                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <span className="w-7 h-7 rounded-full bg-white/95 backdrop-blur-md text-[#0284c7] flex items-center justify-center shadow-xs">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
 
-                      {/* Floating Brand Logo in Corner */}
-                      <div className="absolute bottom-3 left-4 z-10">
-                        <div className="px-3 py-1.5 rounded-lg bg-black/65 backdrop-blur-md border border-white/20 inline-flex items-center">
-                          <img
-                            src={company.whiteLogo || company.logo}
-                            alt={`${company.name} logo`}
-                            className="h-5 sm:h-6 w-auto max-w-[120px] object-contain brightness-110"
-                          />
+                      {/* Bottom Brand Bar (Visible on Image) */}
+                      <div className="absolute inset-x-0 bottom-0 p-3 sm:p-3.5 z-10 flex items-end justify-between gap-2.5 group-hover:opacity-0 transition-opacity duration-200 pointer-events-none">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="px-2 py-1 rounded-lg bg-white/95 backdrop-blur-md border border-[#cee7fc]/80 shadow-xs inline-flex items-center shrink-0">
+                            <img
+                              src={company.logo}
+                              alt={`${company.name} logo`}
+                              className="h-4 sm:h-4.5 w-auto max-w-[80px] object-contain"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-sans text-sm sm:text-base font-bold text-white drop-shadow-xs truncate">
+                              {company.name}
+                            </h3>
+                            <span className="inline-flex items-center gap-1 font-sans text-[10px] sm:text-[11px] text-white/85 font-normal">
+                              <MapPin className="w-3 h-3 text-[#38bdf8]" />
+                              {city}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Lower Editorial Information Area */}
-                    <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white">
+                    {/* Hover Info Surface: Replaces image with full company details */}
+                    <div className="absolute inset-0 z-20 flex flex-col justify-between p-3.5 sm:p-4 bg-white/98 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out translate-y-1 group-hover:translate-y-0">
                       <div>
-                        {/* Thesis & Sector Header */}
-                        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider mb-2">
-                          <span className="text-[#036089] font-black">{company.thesis}</span>
-                          <span className="text-neutral-500 font-bold">{company.sector}</span>
+                        {/* Top: Logo & Fund Badges & Action Arrow */}
+                        <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#cee7fc]/70">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <div className="px-1.5 py-0.5 rounded bg-[#f0f8ff] border border-[#cee7fc] shadow-2xs inline-flex items-center">
+                              <img
+                                src={company.logo}
+                                alt={`${company.name} logo`}
+                                className="h-3.5 sm:h-4 w-auto max-w-[70px] object-contain"
+                              />
+                            </div>
+                            <span className="inline-flex items-center rounded-full bg-[#f0f8ff] px-2 py-0.5 font-sans text-[10px] sm:text-[11px] font-semibold text-[#0284c7] border border-[#cee7fc]">
+                              {fundBadge}
+                            </span>
+                            {isExited && (
+                              <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 font-sans text-[10px] sm:text-[11px] font-semibold text-emerald-700 border border-emerald-200">
+                                Exit
+                              </span>
+                            )}
+                          </div>
+
+                          <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#0284c7] text-white flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </span>
                         </div>
 
-                        {/* Title */}
-                        <h3 className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight text-neutral-950 group-hover:text-neutral-700 transition-colors">
-                          {company.name}
-                        </h3>
-
-                        {/* Stage Progression Badges */}
-                        {company.stages && company.stages.length > 0 && (
-                          <div className="mt-2.5 flex flex-wrap items-center gap-1">
-                            {company.stages.map((st, i) => (
-                              <span key={i} className="inline-flex items-center gap-1">
-                                {i > 0 && <span className="text-neutral-400 font-mono text-[10px]">→</span>}
-                                <span
-                                  className={`px-2 py-0.5 rounded-full font-mono text-[10px] uppercase tracking-wider font-bold ${i === company.stages.length - 1
-                                    ? "bg-neutral-950 text-white"
-                                    : "bg-neutral-100 text-neutral-600 border border-neutral-200"
-                                    }`}
-                                >
-                                  {st}
-                                </span>
-                              </span>
-                            ))}
+                        {/* Title & Location */}
+                        <div className="mt-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <h3 className="font-sans text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#0284c7] transition-colors truncate">
+                              {company.name}
+                            </h3>
+                            <span className="inline-flex items-center gap-1 font-sans text-xs text-neutral-500 font-normal shrink-0">
+                              <MapPin className="w-3 h-3 text-[#0284c7]" />
+                              {city}
+                            </span>
                           </div>
-                        )}
 
-                        {/* One-Liner */}
-                        <p className="mt-3 font-sans text-xs text-neutral-600 line-clamp-2 leading-relaxed">
-                          {company.oneLiner || company.tagline}
-                        </p>
+                          {/* One-Liner Description (NO CAPS, Sentence Case) */}
+                          <p className="mt-1 font-sans text-xs sm:text-[13px] text-neutral-600 line-clamp-2 leading-relaxed">
+                            {company.oneLiner || company.tagline}
+                          </p>
+
+                          {/* AJVC Pill Badges (Sector, Stage, Thesis) */}
+                          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-sans font-medium bg-[#f0f8ff] text-[#0284c7] border border-[#cee7fc] flex items-center gap-1 shrink-0">
+                              <Tag className="w-3 h-3 text-[#0284c7]" />
+                              {company.sector}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-sans font-medium bg-[#f0f8ff] text-[#0284c7] border border-[#cee7fc] flex items-center gap-1 shrink-0">
+                              <Zap className="w-3 h-3 text-[#0284c7]" />
+                              {company.stage}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-sans font-medium bg-[#f8fafc] text-neutral-600 border border-neutral-200 shrink-0">
+                              {company.thesis}
+                            </span>
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Footer Row: Founders & Vintage */}
-                      <div className="mt-5 pt-4 border-t border-black/10 flex flex-col gap-2">
+                      {/* Footer Row: Founders, Vintage & Info CTA */}
+                      <div className="pt-2 border-t border-[#cee7fc]/70 flex flex-col gap-1 mt-auto">
                         {company.founders && (
-                          <div className="font-mono text-[10px] text-neutral-500 uppercase tracking-wider truncate">
-                            <span className="font-bold text-neutral-700">FOUNDERS:</span> {company.founders}
+                          <div className="flex items-center gap-1.5 font-sans text-[11px] sm:text-xs text-neutral-500 truncate">
+                            <Users className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+                            <span className="truncate">{company.founders}</span>
                           </div>
                         )}
 
-                        <div className="flex items-center justify-between font-mono text-[11px] font-bold text-neutral-900 pt-1">
-                          <div className="flex items-center gap-1.5">
+                        <div className="flex items-center justify-between font-sans text-[11px] sm:text-xs pt-0.5">
+                          <div className="flex items-center gap-1.5 text-neutral-600 font-medium">
+                            <Calendar className="w-3.5 h-3.5 text-neutral-400" />
                             <span>{company.vintage ? `Vintage ${company.vintage}` : `Invested in ${company.year}`}</span>
-                            <span className="text-[7px]">■</span>
-                            <span className="text-neutral-700">{fundBadge}</span>
                           </div>
-                          <span className="inline-flex items-center gap-1 text-xs group-hover:translate-x-1 transition-transform font-bold">
-                            Info →
+                          <span className="font-semibold text-[#0284c7] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1 text-[11px] sm:text-xs">
+                            View details →
                           </span>
                         </div>
                       </div>
@@ -575,89 +428,89 @@ export default function PortfolioIndex() {
             </div>
           )}
 
-          {/* ── 4B. VIEW MODE: CORPORATE LEDGER TABLE ── */}
+          {/* ── 4B. VIEW MODE: HORIZONTAL CARDS LIST ── */}
           {viewMode === "ledger" && (
-            <div className="mt-10 overflow-hidden rounded-2xl border-2 border-neutral-900 bg-white shadow-xs">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="border-b-2 border-neutral-900 bg-neutral-50 font-mono text-xs tracking-wider text-neutral-600 font-bold">
-                      <th className="py-4 px-6">Company</th>
-                      <th className="py-4 px-6">Thesis</th>
-                      <th className="py-4 px-6">Sector</th>
-                      <th className="py-4 px-6">Fund Vehicle</th>
-                      <th className="py-4 px-6">Stages Backed</th>
-                      <th className="py-4 px-6">Vintage</th>
-                      <th className="py-4 px-6">Founders</th>
-                      <th className="py-4 px-6 text-right">Info</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-black/10 font-sans text-xs">
-                    {filteredCompanies.map((c) => {
-                      const fundBadge = getFundBadge(c.fund);
-                      return (
-                        <tr
-                          key={c.slug}
-                          onClick={() => navigate({ to: "/portfolio/$slug", params: { slug: c.slug } })}
-                          className="hover:bg-neutral-50/80 cursor-pointer transition-colors group"
-                        >
-                          <td className="py-4 px-6 font-display font-black text-sm uppercase tracking-tight text-neutral-950 flex items-center gap-3">
-                            {c.logo && (
-                              <img
-                                src={c.logo}
-                                alt=""
-                                className="h-5 w-auto max-w-[60px] object-contain opacity-80"
-                              />
-                            )}
-                            <span className="group-hover:text-neutral-700 transition-colors">
-                              {c.name}
+            <div className="mt-10 space-y-4">
+              {filteredCompanies.map((company) => {
+                const isExited = company.slug === "internshala" || company.status === "Exited";
+                const fundBadge = getFundBadge(company.fund);
+                const city = getCompanyLocation(company.slug);
+
+                return (
+                  <Link
+                    key={company.slug}
+                    to="/portfolio/$slug"
+                    params={{ slug: company.slug }}
+                    className="rounded-2xl border-2 border-[#cee7fc] bg-white p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-6 shadow-2xs hover:shadow-md transition-all group cursor-pointer"
+                  >
+                    {/* Left: Rounded Logo Box */}
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#f7fbff] border border-[#cee7fc]/80 p-2.5 flex items-center justify-center shrink-0 shadow-2xs transition-colors">
+                      <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
+                    </div>
+
+                    {/* Middle: Content details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                          <h3 className="font-sans text-lg sm:text-xl font-bold text-neutral-900 group-hover:text-[#0284c7] transition-colors">
+                            {company.name}
+                          </h3>
+                          <span className="inline-flex items-center gap-1 font-sans text-xs sm:text-sm text-neutral-500 font-normal">
+                            <MapPin className="w-3.5 h-3.5 text-[#0284c7]" />
+                            {city}
+                          </span>
+                        </div>
+
+                        {/* Right: Cohort / Fund badge ( style) */}
+                        <div className="flex items-center gap-2">
+                          <span className="font-sans text-xs font-bold text-[#0284c7] tracking-wider">
+                            {fundBadge} · {company.vintage || company.year}
+                          </span>
+                          {isExited && (
+                            <span className="px-2.5 py-0.5 rounded-full text-xs font-sans font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                              M&amp;A Exit
                             </span>
-                          </td>
-                          <td className="py-4 px-6 font-mono text-neutral-900 font-black uppercase text-[11px]">
-                            {c.thesis}
-                          </td>
-                          <td className="py-4 px-6 font-mono text-neutral-600 font-bold uppercase text-[11px]">
-                            {c.sector}
-                          </td>
-                          <td className="py-4 px-6 font-mono font-bold">
-                            <span className="px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-900 border border-neutral-300 whitespace-nowrap">
-                              {fundBadge}
-                            </span>
-                          </td>
-                          <td className="py-4 px-6 font-mono text-neutral-700">
-                            <div className="flex flex-wrap items-center gap-1">
-                              {c.stages.map((st, i) => (
-                                <span key={i} className="inline-flex items-center gap-1">
-                                  {i > 0 && <span className="text-neutral-400 text-[10px]">→</span>}
-                                  <span
-                                    className={`px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap ${i === c.stages.length - 1
-                                      ? "bg-neutral-950 text-white"
-                                      : "bg-neutral-100 text-neutral-600 border border-neutral-200"
-                                      }`}
-                                  >
-                                    {st}
-                                  </span>
-                                </span>
-                              ))}
-                            </div>
-                          </td>
-                          <td className="py-4 px-6 font-mono text-neutral-900 font-bold whitespace-nowrap">
-                            {c.vintage || c.year}
-                          </td>
-                          <td className="py-4 px-6 font-sans text-neutral-600 max-w-xs truncate">
-                            {c.founders ?? "Founding Team"}
-                          </td>
-                          <td className="py-4 px-6 text-right">
-                            <span className="inline-flex items-center gap-1 font-mono text-xs font-bold text-neutral-900 group-hover:translate-x-1 transition-transform whitespace-nowrap">
-                              View →
-                            </span>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* One-Liner Description (NO CAPS, sentence case) */}
+                      <p className="mt-1.5 font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed line-clamp-2">
+                        {company.oneLiner || company.tagline}
+                      </p>
+
+                      {/* Bottom: AJVC Pill tags + Founders */}
+                      <div className="mt-3.5 flex items-center justify-between gap-3 flex-wrap">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="px-3 py-0.5 rounded-full text-xs font-sans font-medium bg-[#f0f8ff] text-[#0284c7] border border-[#cee7fc] flex items-center gap-1">
+                            <Tag className="w-3 h-3 text-[#0284c7]" />
+                            {company.sector}
+                          </span>
+                          <span className="px-3 py-0.5 rounded-full text-xs font-sans font-medium bg-[#f0f8ff] text-[#0284c7] border border-[#cee7fc] flex items-center gap-1">
+                            <Zap className="w-3 h-3 text-[#0284c7]" />
+                            {company.stage}
+                          </span>
+                          <span className="px-3 py-0.5 rounded-full text-xs font-sans font-medium bg-[#f8fafc] text-neutral-600 border border-neutral-200">
+                            {company.thesis}
+                          </span>
+                        </div>
+
+                        {company.founders && (
+                          <div className="flex items-center gap-1.5 font-sans text-xs text-neutral-500">
+                            <Users className="w-3.5 h-3.5 text-neutral-400" />
+                            <span>{company.founders}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Right Arrow Button */}
+                    <div className="hidden md:flex w-9 h-9 rounded-full bg-[#f0f8ff] group-hover:bg-[#0284c7] text-[#0284c7] group-hover:text-white items-center justify-center transition-all shrink-0">
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
 
@@ -678,9 +531,9 @@ export default function PortfolioIndex() {
                   setSelectedSector("ALL");
                   setActiveFund("ALL");
                 }}
-                className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-neutral-800 transition-colors"
+                className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0284c7] text-white font-sans text-xs font-semibold hover:bg-[#036089] transition-colors"
               >
-                Reset All Filters
+                Reset all filters
               </button>
             </div>
           )}
@@ -727,11 +580,11 @@ export default function PortfolioIndex() {
             onClick={() => navigate({ to: "/contact" })}
             role="button"
             tabIndex={0}
-            className="group relative h-72 sm:h-80 rounded-[28px] border-2 border-neutral-950 bg-white p-7 sm:p-8 flex flex-col justify-between cursor-pointer hover:bg-neutral-50 transition-all shadow-xs hover:shadow-md"
+            className="group relative h-72 sm:h-80 rounded-[28px] border-2 border-neutral-900/15 hover:border-neutral-950 bg-white p-7 sm:p-8 flex flex-col justify-between cursor-pointer hover:bg-neutral-50 transition-all shadow-xs hover:shadow-md"
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span className="px-2.5 py-0.5 rounded-full bg-neutral-950 text-white font-bold">
-                [18 // NEXT]
+                NEXT
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-950 text-white font-bold">
                 ● ACTIVE INTAKE
@@ -762,11 +615,11 @@ export default function PortfolioIndex() {
             onClick={() => navigate({ to: "/funds" })}
             role="button"
             tabIndex={0}
-            className="group relative h-72 sm:h-80 rounded-[28px] border-2 border-neutral-950 bg-neutral-950 text-white p-7 sm:p-8 flex flex-col justify-between cursor-pointer hover:bg-neutral-900 transition-all shadow-md hover:shadow-xl"
+            className="group relative h-72 sm:h-80 rounded-[28px] border-2 border-neutral-800 hover:border-white bg-neutral-950 text-white p-7 sm:p-8 flex flex-col justify-between cursor-pointer hover:bg-neutral-900 transition-all shadow-md hover:shadow-xl"
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-white font-bold">
-                [19 // ALLOCATION]
+                ALLOCATION
               </span>
               <span className="text-white/60 font-semibold">SEBI AIFs</span>
             </div>

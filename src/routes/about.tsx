@@ -77,11 +77,9 @@ function About() {
               <div>
                 <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-[-0.035em] leading-[0.94] text-balance text-neutral-950">
                   Capital with
-                  <br />
                   Conciction.
                   <br />
                   Character for
-                  <br />
                   Generations.
                 </h1>
               </div>

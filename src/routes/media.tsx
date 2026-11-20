@@ -806,7 +806,7 @@ function MediaPage() {
       {/* ═══════════════════════════════════════════════════════════
           0. LEAD HERO — 3-COLUMN PORTFOLIO DOSSIER & MEDIA HIGHLIGHTS
       ═══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b border-black/15 bg-white pt-10 pb-12 sm:pt-14 sm:pb-16">
+      <section className="relative overflow-hidden bg-white pt-10 pb-4 sm:pt-14 sm:pb-6">
         <div className="container-tight">
           <div className="flex items-center gap-2.5 font-mono text-xs font-black uppercase tracking-[0.25em] text-neutral-800 mb-8 sm:mb-10">
             <span className="w-2 h-2 rounded-full bg-neutral-900 animate-pulse" />
@@ -816,18 +816,18 @@ function MediaPage() {
           {/* 3-Column Dossier Dashboard */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-10 items-start">
             {/* ──────────────────────────────────────────────────────────
-                COLUMN 1: EXPERIENCE
+                COLUMN 1: PORTFOLIO MILESTONES
             ────────────────────────────────────────────────────────── */}
             <div className="flex flex-col">
               <div className="flex items-center justify-between pb-4">
                 <h2 className="text-3xl font-display font-black text-neutral-950 tracking-tight">
-                  Experience
+                  Portfolio Milestones
                 </h2>
                 <button
                   type="button"
                   onClick={() => setExperienceOpen(!experienceOpen)}
                   className="w-8 h-8 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 flex items-center justify-center text-neutral-700 transition-colors cursor-pointer"
-                  aria-label="Toggle Experience section"
+                  aria-label="Toggle Portfolio Milestones section"
                 >
                   <ChevronDown
                     className={`w-4 h-4 transition-transform duration-200 ${experienceOpen ? "" : "-rotate-90"
@@ -973,20 +973,20 @@ function MediaPage() {
             </div>
 
             {/* ──────────────────────────────────────────────────────────
-                COLUMN 2: EXPERTISE / HARDSKILL / SOFTSKILL
+                COLUMN 2: SECTOR FOCUS / IN THE FIELD / THESIS TAGS
             ────────────────────────────────────────────────────────── */}
             <div className="flex flex-col lg:border-x border-neutral-300/70 lg:px-6">
-              {/* Block 1: Expertise */}
+              {/* Block 1: Sector Focus */}
               <div className="pb-6 border-b border-neutral-300/70">
                 <div className="flex items-center justify-between pb-3">
                   <h2 className="text-3xl font-display font-black text-neutral-950 tracking-tight">
-                    Expertise
+                    Sector Focus
                   </h2>
                   <button
                     type="button"
                     onClick={() => setExpertiseOpen(!expertiseOpen)}
                     className="w-8 h-8 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 flex items-center justify-center text-neutral-700 transition-colors cursor-pointer"
-                    aria-label="Toggle Expertise section"
+                    aria-label="Toggle Sector Focus section"
                   >
                     <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${expertiseOpen ? "" : "-rotate-90"
@@ -1001,17 +1001,17 @@ function MediaPage() {
                 )}
               </div>
 
-              {/* Block 2: Hardskill */}
+              {/* Block 2: Portfolio in Action */}
               <div className="py-6 border-b border-neutral-300/70">
                 <div className="flex items-center justify-between pb-3">
                   <h2 className="text-3xl font-display font-black text-neutral-950 tracking-tight">
-                    Hardskill
+                    Portfolio in Action
                   </h2>
                   <button
                     type="button"
                     onClick={() => setHardskillOpen(!hardskillOpen)}
                     className="w-8 h-8 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 flex items-center justify-center text-neutral-700 transition-colors cursor-pointer"
-                    aria-label="Toggle Hardskill section"
+                    aria-label="Toggle Portfolio in Action section"
                   >
                     <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${hardskillOpen ? "" : "-rotate-90"
@@ -1030,17 +1030,17 @@ function MediaPage() {
                 )}
               </div>
 
-              {/* Block 3: Softskill */}
+              {/* Block 3: Thesis Tags */}
               <div className="pt-6">
                 <div className="flex items-center justify-between pb-3">
                   <h2 className="text-3xl font-display font-black text-neutral-950 tracking-tight">
-                    Softskill
+                    Thesis
                   </h2>
                   <button
                     type="button"
                     onClick={() => setSoftskillOpen(!softskillOpen)}
                     className="w-8 h-8 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 flex items-center justify-center text-neutral-700 transition-colors cursor-pointer"
-                    aria-label="Toggle Softskill section"
+                    aria-label="Toggle Thesis Tags section"
                   >
                     <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${softskillOpen ? "" : "-rotate-90"
@@ -1077,18 +1077,18 @@ function MediaPage() {
             </div>
 
             {/* ──────────────────────────────────────────────────────────
-                COLUMN 3: EDUCATION
+                COLUMN 3: KEY ACHIEVEMENTS
             ────────────────────────────────────────────────────────── */}
             <div className="flex flex-col">
               <div className="flex items-center justify-between pb-4">
                 <h2 className="text-3xl font-display font-black text-neutral-950 tracking-tight">
-                  Education
+                  Key Achievements
                 </h2>
                 <button
                   type="button"
                   onClick={() => setEducationOpen(!educationOpen)}
                   className="w-8 h-8 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 flex items-center justify-center text-neutral-700 transition-colors cursor-pointer"
-                  aria-label="Toggle Education section"
+                  aria-label="Toggle Key Achievements section"
                 >
                   <ChevronDown
                     className={`w-4 h-4 transition-transform duration-200 ${educationOpen ? "" : "-rotate-90"
@@ -1166,24 +1166,6 @@ function MediaPage() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-
-        {/* Minimalist Sub-Bar Divider */}
-        <div className="w-full mt-10 sm:mt-14 border-t border-black/10 bg-neutral-100/70 text-neutral-900 px-6 sm:px-10 py-3.5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-wider font-bold">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
-            <span>Portfolio Press Room &amp; Media Highlights</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-[11px] text-neutral-600">
-            <span>{totalMentions}+ Public Records</span>
-            <span>·</span>
-            <span>National Press</span>
-            <span>·</span>
-            <span>{companiesCovered} Companies Featured</span>
-            <span>·</span>
-            <span>Verified Sources</span>
           </div>
         </div>
       </section>

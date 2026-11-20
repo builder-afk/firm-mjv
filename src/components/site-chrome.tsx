@@ -4,12 +4,12 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import mountFooterWatermark from "@/assets/mount-footer-watermark.png";
 
 const nav = [
-  { to: "/portfolio", label: "PORTFOLIO" },
-  { to: "/thesis", label: "THESIS" },
-  { to: "/team", label: "TEAM" },
-  { to: "/about", label: "ABOUT" },
-  { to: "/media", label: "MEDIA" },
-  { to: "/contact", label: "CONTACT" },
+  { to: "/portfolio", label: "Portfolio" },
+  { to: "/thesis", label: "Thesis" },
+  { to: "/team", label: "Team" },
+  { to: "/about", label: "About" },
+  { to: "/media", label: "Media" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function SiteHeader() {
@@ -35,17 +35,19 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-xs border-b border-black/[0.06]" : ""
-        }`}
+      className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-300 border-b border-neutral-200/80 ${
+        scrolled ? "shadow-sm" : "shadow-2xs"
+      }`}
     >
       {/* Floating Navigation — separate rounded pills over the page */}
-      <div className="container-tight flex items-center justify-between gap-3 py-3 md:py-4">
+      <div className="container-tight flex items-center justify-between gap-3 py-3 md:py-3.5">
         {/* Left pill: brand + links (active link = solid ink pill) */}
         <div
-          className={`pointer-events-auto flex items-center gap-1 md:gap-2 rounded-full bg-white border border-[var(--ink)]/[0.08] p-1.5 transition-shadow duration-300 ${scrolled
-            ? "shadow-[0_10px_30px_-12px_rgba(12,26,46,0.25)]"
-            : "shadow-[0_2px_10px_-4px_rgba(12,26,46,0.12)]"
-            }`}
+          className={`pointer-events-auto flex items-center gap-1 md:gap-2 rounded-full bg-white border border-neutral-300/80 p-1.5 transition-all duration-300 ${
+            scrolled
+              ? "shadow-[0_10px_30px_-12px_rgba(12,26,46,0.22)] border-neutral-300"
+              : "shadow-[0_4px_16px_-4px_rgba(12,26,46,0.14)]"
+          }`}
         >
           <Link
             to="/"
@@ -59,14 +61,14 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav className="hidden xl:flex items-center gap-0.5">
+          <nav className="hidden xl:flex items-center gap-1">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="px-3.5 py-2.5 rounded-full font-sans text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--ink)] hover:bg-neutral-100 transition-all duration-200 focus:outline-none"
+                className="px-4 py-2 rounded-full font-sans text-[13px] sm:text-[14px] font-medium text-neutral-800 hover:text-[#0284c7] hover:bg-neutral-100 transition-all duration-200 focus:outline-none"
                 activeProps={{
-                  className: "!bg-[var(--ink)] !text-white",
+                  className: "!bg-neutral-950 !text-white !font-semibold shadow-xs",
                 }}
               >
                 {n.label}
@@ -77,21 +79,22 @@ export function SiteHeader() {
 
         {/* Right pill: round icon button + contact label */}
         <div
-          className={`pointer-events-auto flex items-center gap-2 rounded-full bg-white border border-[var(--ink)]/[0.08] p-1.5 transition-shadow duration-300 ${scrolled
-            ? "shadow-[0_10px_30px_-12px_rgba(12,26,46,0.25)]"
-            : "shadow-[0_2px_10px_-4px_rgba(12,26,46,0.12)]"
-            }`}
+          className={`pointer-events-auto flex items-center gap-2 rounded-full bg-white border border-neutral-300/80 p-1.5 transition-all duration-300 ${
+            scrolled
+              ? "shadow-[0_10px_30px_-12px_rgba(12,26,46,0.22)] border-neutral-300"
+              : "shadow-[0_4px_16px_-4px_rgba(12,26,46,0.14)]"
+          }`}
         >
           <Link
             to="/contact"
             className="group hidden sm:flex items-center gap-3 rounded-full focus:outline-none"
             onClick={() => setMobileOpen(false)}
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ink)] text-white transition-transform duration-200 group-hover:rotate-45">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-950 text-white transition-transform duration-200 group-hover:rotate-45 group-hover:bg-[#0284c7]">
               <ArrowUpRight className="h-4 w-4" />
             </span>
-            <span className="pr-4 font-sans text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--ink)]">
-              Pitch Your Startup
+            <span className="pr-4 font-sans text-[13px] sm:text-[14px] font-semibold text-neutral-900 group-hover:text-[#0284c7] transition-colors">
+              Pitch your startup
             </span>
           </Link>
 
@@ -101,7 +104,7 @@ export function SiteHeader() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={mobileOpen}
-            className="xl:hidden h-10 px-5 rounded-full bg-[var(--ink)] text-white font-sans text-[12px] font-semibold uppercase tracking-[0.06em] hover:bg-neutral-800 transition-colors duration-200"
+            className="xl:hidden h-10 px-5 rounded-full bg-neutral-950 text-white font-sans text-[13px] font-semibold hover:bg-neutral-800 transition-colors duration-200"
           >
             {mobileOpen ? "Close ✕" : "Menu"}
           </button>
@@ -113,18 +116,18 @@ export function SiteHeader() {
         <div
           role="dialog"
           aria-modal="true"
-          className="pointer-events-auto fixed inset-x-3 md:inset-x-6 top-[76px] md:top-[88px] bottom-3 z-50 rounded-[28px] bg-white border border-[var(--ink)]/[0.08] shadow-2xl p-5 md:p-8 flex flex-col justify-between overflow-y-auto xl:hidden animate-fade-in"
+          className="pointer-events-auto fixed inset-x-3 md:inset-x-6 top-[76px] md:top-[88px] bottom-3 z-50 rounded-[28px] bg-white border border-neutral-200 shadow-2xl p-5 md:p-8 flex flex-col justify-between overflow-y-auto xl:hidden animate-fade-in"
         >
           <div className="space-y-5">
-            <div className="flex items-center justify-between pb-4">
+            <div className="flex items-center justify-between pb-4 border-b border-neutral-100">
               <img
                 src="/Mountjudilogo.png"
                 alt="Mount Judi Ventures"
                 className="h-8 w-auto object-contain"
               />
-              <span className="pill-badge !text-[9px] !py-1 !px-3">
+              <span className="pill-badge !text-[11px] !py-1 !px-3 font-sans">
                 <span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />
-                NAVIGATION
+                Navigation
               </span>
             </div>
             <nav className="flex flex-col gap-2">
@@ -133,19 +136,19 @@ export function SiteHeader() {
                   key={n.to}
                   to={n.to}
                   onClick={() => setMobileOpen(false)}
-                  className="py-4 px-5 rounded-2xl font-display text-xl font-bold tracking-tight text-[var(--ink)] hover:bg-neutral-100 transition-all flex items-center justify-between group"
+                  className="py-3.5 px-4 rounded-2xl font-sans text-lg font-semibold text-neutral-900 hover:bg-neutral-100 transition-all flex items-center justify-between group"
                 >
                   <span>{n.label}</span>
-                  <ArrowRight className="h-4 w-4 text-[var(--ink-muted)] group-hover:text-[var(--ink)] group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="h-4 w-4 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" />
                 </Link>
               ))}
               <Link
                 to="/perspective"
                 onClick={() => setMobileOpen(false)}
-                className="py-4 px-5 rounded-2xl font-display text-xl font-bold tracking-tight text-[var(--ink)] hover:bg-neutral-100 transition-all flex items-center justify-between group"
+                className="py-3.5 px-4 rounded-2xl font-sans text-lg font-semibold text-neutral-900 hover:bg-neutral-100 transition-all flex items-center justify-between group"
               >
-                <span>PERSPECTIVES</span>
-                <ArrowRight className="h-4 w-4 text-[var(--ink-muted)] group-hover:text-[var(--ink)] group-hover:translate-x-1 transition-all" />
+                <span>Perspectives</span>
+                <ArrowRight className="h-4 w-4 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" />
               </Link>
             </nav>
           </div>
@@ -154,13 +157,13 @@ export function SiteHeader() {
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="w-full brutal-btn-primary justify-center text-center !py-3.5"
+              className="w-full brutal-btn-primary justify-center text-center !py-3.5 font-sans font-semibold text-sm"
             >
               <span className="h-2 w-2 rounded-full bg-white" />
-              Pitch Your Startup →
+              Pitch your startup →
             </Link>
             <div className="font-mono text-[10px] text-[var(--ink-muted)] text-center tracking-wider">
-              SEBI REG: IN/AIF2/18-19/0536 & IN/AIF1/22-23/1068
+              SEBI REG: IN/AIF2/18-19/0536 &amp; IN/AIF1/22-23/1068
             </div>
           </div>
         </div>

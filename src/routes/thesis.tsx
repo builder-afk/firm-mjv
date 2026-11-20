@@ -314,8 +314,21 @@ function Thesis() {
     <div className="bg-[var(--paper)] text-[var(--ink)] min-h-screen">
 
       {/* ── 2. THE THREE FOUNDATIONAL PILLARS (HORIZONTAL FLOW PIPELINE) ── */}
-      <section className="border-b-2 border-neutral-950 bg-white py-14 md:py-20">
-        <div className="container-tight">
+      <section className="relative border-b-2 border-neutral-950 bg-white py-14 md:py-20 overflow-hidden">
+        {/* Architectural Background Grid Texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(0, 0, 0, 0.07) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0.07) 1px, transparent 1px)
+            `,
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div className="container-tight relative z-10">
           {/* Top Intro Section: Headline + Stat Card */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 md:mb-12">
             <div className="max-w-2xl">
@@ -358,19 +371,6 @@ function Thesis() {
 
           {/* Horizontal Flow Pipeline (Borderless Canvas, Static Layout) */}
           <div className="relative px-2 sm:px-4 py-6 md:py-12">
-            {/* Subtle Millimeter Blueprint Grid Texture (borderless background) */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 pointer-events-none opacity-40 rounded-2xl"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px)
-                `,
-                backgroundSize: "28px 28px",
-              }}
-            />
-
             {/* Continuous Wire Track SVG across the 3 horizontal cards */}
             <svg
               aria-hidden="true"
@@ -508,7 +508,7 @@ function Thesis() {
       </section>
 
       {/* ── 3. DEEP MONOGRAPH CHAPTERS (PINNED MEMO BOARD & NOTEBOOK CANVAS) ── */}
-      <section className="relative border-b-2 border-neutral-950 bg-white pt-8 pb-20 sm:pt-10 md:pt-12 md:pb-28 overflow-hidden">
+      <section className="relative bg-white pt-8 pb-16 sm:pt-10 md:pt-12 md:pb-20 overflow-hidden">
         {/* Subtle Horizontal Ruled Notebook Lines */}
         <div
           aria-hidden="true"
@@ -681,7 +681,7 @@ function Thesis() {
       </section>
 
       {/* ── 4. BOTTOM ALLOCATION TERMINAL ── */}
-      <section className="container-tight pb-20 md:pb-28">
+      <section className="container-tight pt-4 sm:pt-6 md:pt-8 pb-20 md:pb-28">
         <div className="rounded-[36px] bg-neutral-950 text-white p-8 sm:p-12 md:p-16 relative overflow-hidden shadow-xl border border-white/10">
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-10">
             <div className="max-w-2xl">
@@ -694,27 +694,27 @@ function Thesis() {
               </h2>
               <p className="mt-4 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
                 We write initial checks from ₹2 Cr to ₹25 Cr between Seed and Series A. Pitch
-                directly to partners with a guaranteed 14-day turnaround.
+                directly to partners with a guaranteed response within seven business days.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-neutral-200 text-neutral-900 font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 shadow-md hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Pitch Your Company</span>
                 <span className="w-6 h-6 rounded-full bg-neutral-900 text-white flex items-center justify-center text-xs">
                   →
                 </span>
-              </a>
-              <a
-                href="/portfolio"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/15"
+              </Link>
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all border border-white/15 hover:border-white/30"
               >
                 <span>View Full Portfolio</span>
                 <span>↗</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -392,7 +392,10 @@ export const team: TeamMember[] = [
     summary: "Ensuring governance with precision and clarity.",
     intro: "Shruthi supports compliance and corporate governance as Company Secretary at Mount Judi Ventures.",
     bio: [
-      "Shruthi Karnam serves as Company Secretary at Mount Judi Ventures, supporting the firm's governance framework and compliance obligations.",
+      "Shruthi is a qualified Company Secretary from the Institute of Company Secretaries of India (ICSI) and a Law Graduate from Karnataka State Law University (KSLU), Class of 2022. She brings over four years of professional experience spanning fundraising, corporate law, regulatory compliance.",
+      "At Mount Judi Ventures, Shruthi oversees legal and compliance functions relating to Alternative Investment Funds (AIFs), with a focus on SEBI regulations, fund governance, investor documentation and regulatory reporting. Her responsibilities extend to fundraising support, transaction documentation, statutory compliance and coordination with regulatory authorities and key stakeholders.",
+      "Her expertise encompasses the Companies Act, FEMA, LLP regulations and the regulatory framework governing AIFs. She works closely with legal advisors, trustees, custodians and other stakeholders to ensure regulatory adherence and facilitate seamless fund operations.",
+      "At Mount Judi Ventures, she works across the firm's legal, compliance and fund operations functions, contributing to the execution of fundraising activities, regulatory obligations and governance processes.",
     ],
     philosophy: "Good governance enables good decisions.",
     focus: ["Company Secretarial", "Governance", "Compliance"],

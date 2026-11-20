@@ -433,7 +433,7 @@ export function FoundersBento() {
           </div>
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 hover:bg-[#036089] text-white font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-xs group"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-950 hover:bg-[#036089] text-white font-mono text-xs tracking-wider font-bold transition-all shadow-xs group"
           >
             <span>Explore all portfolio founders</span>
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -495,6 +495,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -505,6 +506,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -514,6 +516,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -523,6 +526,7 @@
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -532,6 +536,7 @@
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-50%);
   }
@@ -579,6 +584,7 @@
 
 .crosshair-corner {
   position: relative;
+
   &::before {
     content: "+";
     position: absolute;
@@ -596,6 +602,7 @@
     opacity: 0;
     transform: translateY(18px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -608,6 +615,7 @@
     opacity: 0.6;
     transform: scale(1.05);
   }
+
   100% {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     opacity: 1;
@@ -621,4 +629,33 @@
 
 @utility animate-panel-wipe {
   animation: panel-wipe-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Custom image framing for portfolio cards */
+.object-\[15\%_center\] {
+  object-position: 15% center !important;
+}
+
+.object-\[20\%_center\] {
+  object-position: 20% center !important;
+}
+
+.object-\[75\%_center\] {
+  object-position: 75% center !important;
+}
+
+.object-\[78\%_center\] {
+  object-position: 78% center !important;
+}
+
+.object-\[80\%_center\] {
+  object-position: 80% center !important;
+}
+
+.object-\[center_25\%\] {
+  object-position: center 25% !important;
+}
+
+.object-\[center_72\%\] {
+  object-position: center 72% !important;
 }

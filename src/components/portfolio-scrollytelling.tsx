@@ -3,23 +3,21 @@ import { Link } from "@tanstack/react-router";
 import {
   ExternalLink,
   ArrowRight,
-  Quote,
-  Sparkles,
 } from "lucide-react";
 
-import basecareImg from "@/assets/portfolio/4basecare.webp";
-import skyeAirImg from "@/assets/portfolio/skye-air.jpg";
-import staquImg from "@/assets/portfolio/staqu.jpg";
-import dilFoodsSharkTank from "@/assets/press/dil-foods-shark-tank.webp";
-import internshalaPhoto from "@/assets/internshalash.avif";
-import convegeniusImg from "@/assets/portfolio/convegenius.jpg";
-import innaccelImg from "@/assets/portfolio/innaccel.jpg";
-import hexalogImg from "@/assets/portfolio/hexalog.jpg";
-import freshtohomeImg from "@/assets/portfolio/freshtohome.jpg";
-import loFoodsImg from "@/assets/portfolio/protein.webp";
-import sprwImg from "@/assets/sprobo.jpeg";
-import thimblerrImg from "@/assets/portfolio/thimblerr.jpg";
-import freshleafImg from "@/assets/portfolio/FreshleafProfileFeatureImage-1717987632067.avif";
+import press_4basecare from "@/assets/press/economictimes-8fd6fc5066.webp";
+import press_skyeair from "@/assets/press/yourstory-7485048f98.webp";
+import press_staqu from "@/assets/press/india-781d36f6ad.webp";
+import press_dilfoods from "@/assets/press/dil-foods-et-funding.webp";
+import press_internshala from "@/assets/press/fortuneindia-ac5d9ed415.webp";
+import press_convegenius from "@/assets/press/yourstory-85bf159e82.webp";
+import press_innaccel from "@/assets/press/yourstory-9a3c8304ea.webp";
+import press_hexalog from "@/assets/press/inc42-42ca269a87.webp";
+import press_freshtohome from "@/assets/press/techcrunch-9328f8a3a8.webp";
+import press_proteinchef from "@/assets/press/yourstory-57a8c7fb65.webp";
+import press_sprw from "@/assets/press/edtechreview-9e3707b291.webp";
+import press_thimblerr from "@/assets/press/indianstartuptimes-6a8ea4a2e7.webp";
+import press_freshleaf from "@/assets/portfolio/FreshleafProfileFeatureImage-1717987632067.avif";
 
 import basecareLogo from "@/assets/logos/4basecare.webp";
 import skyeAirLogo from "@/assets/logos/skye-air.webp";
@@ -70,7 +68,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "Our mission is to bring tailored, genomic-backed cancer treatments to every patient in India and Southeast Asia at a fraction of global costs.",
     founder: "Hitesh Goswami & Kshitij Rishi",
-    image: basecareImg,
+    image: press_4basecare,
     logo: basecareLogo,
   },
   {
@@ -89,7 +87,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "We've proven that autonomous drones cut healthcare cold-chain logistics from hours to minutes, unlocking last-mile delivery that was previously impossible.",
     founder: "Ankit Kumar",
-    image: skyeAirImg,
+    image: press_skyeair,
     logo: skyeAirLogo,
   },
   {
@@ -108,7 +106,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "JARVIS transforms conventional video infrastructure into an intelligent nervous system for law enforcement, retail safety, and sovereign security.",
     founder: "Atul Rai",
-    image: staquImg,
+    image: press_staqu,
     logo: staquLogo,
   },
   {
@@ -127,7 +125,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "We turn underutilized commercial kitchen capacity into profitable revenue streams without requiring restaurateurs to invest in additional real estate.",
     founder: "Arpita Aditi",
-    image: dilFoodsSharkTank,
+    image: press_dilfoods,
     logo: dilFoodsLogo,
   },
   {
@@ -146,7 +144,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "Mount Judi stood with us when our thesis of connecting India's student talent directly to internships was unproven. Their conviction enabled this market-defining outcome.",
     founder: "Sarvesh Agrawal",
-    image: internshalaPhoto,
+    image: press_internshala,
     logo: internshalaLogo,
   },
   {
@@ -165,7 +163,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "By utilizing WhatsApp, we eliminate digital divide barriers and bring world-class adaptive AI tutoring to every child in India, regardless of geography or household income.",
     founder: "Jairaj Bhattacharya & Shashank Pandey",
-    image: convegeniusImg,
+    image: press_convegenius,
     logo: convegeniusLogo,
   },
   {
@@ -184,7 +182,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "We design medical devices engineered specifically for the clinical constraints of emerging markets, achieving global FDA/CE standards at prices public hospitals can afford.",
     founder: "Siraj Dhanani",
-    image: innaccelImg,
+    image: press_innaccel,
     logo: innaccelLogo,
   },
   {
@@ -203,7 +201,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "Cross-border trade from India has long been crippled by paper bureaucracy. Hexalog provides the single digital rail that makes export compliance instantaneous and audit-proof.",
     founder: "Vivek Kele",
-    image: hexalogImg,
+    image: press_hexalog,
     logo: hexalogLogo,
   },
   {
@@ -222,13 +220,13 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "Our direct sourcing eliminates intermediate auction houses, ensuring zero chemicals, guaranteed freshness, and 20% higher earnings for traditional fishermen.",
     founder: "Shan Kadavil & Matthew Joseph",
-    image: freshtohomeImg,
+    image: press_freshtohome,
     logo: freshtohomeLogo,
   },
   {
-    id: "lo-foods",
+    id: "protein-chef",
     company: "Protein Chef",
-    slug: "lo-foods",
+    slug: "protein-chef",
     category: "Functional Nutrition",
     stat: "₹100 Cr",
     statLabel: "Annual Run Rate Scaled",
@@ -241,7 +239,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "We engineered everyday Indian staples like atta, snacks, and cookies to have 80% fewer carbohydrates without compromising taste or cultural familiarity.",
     founder: "Sudarshan Gangrade",
-    image: loFoodsImg,
+    image: press_proteinchef,
     logo: loFoodsLogo,
   },
   {
@@ -260,7 +258,7 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "Mount Judi's early belief allowed us to build patent-backed experiential tech curricula that inspire India's next generation of inventors and roboticists.",
     founder: "Sneha Priya & Pranavan",
-    image: sprwImg,
+    image: press_sprw,
     logo: sprwLogo,
   },
   {
@@ -279,13 +277,13 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "By replacing fragmented phone calls and spreadsheets with real-time IoT floor telemetry, we make high-speed fashion manufacturing transparent and agile.",
     founder: "Dinesh K. & Team",
-    image: thimblerrImg,
+    image: press_thimblerr,
     logo: thimblerrLogo,
   },
   {
-    id: "freshleaf",
+    id: "freshleaf-tea",
     company: "Freshleaf Tea",
-    slug: "freshleaf",
+    slug: "freshleaf-tea",
     category: "Artisanal D2C Beverages",
     stat: "Seed",
     statLabel: "Direct-from-Estate Network",
@@ -298,168 +296,185 @@ export const portfolioNewsData: PortfolioNewsItem[] = [
     quote:
       "We eliminate multi-layer auction cartels, ensuring customers drink authentic unblended teas while small estate growers receive higher, fairer realization.",
     founder: "Balkirat Singh",
-    image: freshleafImg,
+    image: press_freshleaf,
     logo: freshleafLogo,
   },
 ];
 
 export function PortfolioNewsScrollytelling() {
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
-  const listContainerRef = useRef<HTMLDivElement | null>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const isProgrammaticScroll = useRef(false);
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const isClickScrolling = useRef(false);
 
   const activeStory = portfolioNewsData[activeStoryIndex] || portfolioNewsData[0];
 
-  // Select a story and scroll it smoothly into view in the right list
-  const selectStory = useCallback((index: number, smoothScroll = true) => {
+  // Smooth scroll window to target story when clicked
+  const selectStory = useCallback((index: number) => {
     setActiveStoryIndex(index);
     const target = itemRefs.current[index];
-    if (target && listContainerRef.current) {
-      isProgrammaticScroll.current = true;
-      target.scrollIntoView({
-        behavior: smoothScroll ? "smooth" : "auto",
-        block: "nearest",
+    if (target) {
+      isClickScrolling.current = true;
+      const navOffset = 110;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
       });
-      // Release programmatic flag after smooth scroll completes
+
       setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 400);
+        isClickScrolling.current = false;
+      }, 700);
     }
   }, []);
 
-  // Handle scroll on the right-side list container:
-  // Detects which news item is closest to the focal point of the list container
-  const handleListScroll = useCallback(() => {
-    if (isProgrammaticScroll.current) return;
-    const container = listContainerRef.current;
-    if (!container) return;
+  // Window scroll listener: calculates which story is currently in the active reading focal point
+  useEffect(() => {
+    let ticking = false;
 
-    const containerRect = container.getBoundingClientRect();
-    // Center point of the visible list window
-    const focalY = containerRect.top + containerRect.height * 0.38;
+    const handleScroll = () => {
+      if (isClickScrolling.current) return;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Trigger point around upper 45% of viewport
+          const triggerY = window.innerHeight * 0.45;
+          let current = 0;
 
-    let closestIndex = 0;
-    let minDistance = Infinity;
+          for (let i = 0; i < portfolioNewsData.length; i++) {
+            const el = itemRefs.current[i];
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= triggerY) {
+                current = i;
+              } else {
+                break;
+              }
+            }
+          }
 
-    itemRefs.current.forEach((el, index) => {
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const itemCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(focalY - itemCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
+          setActiveStoryIndex(current);
+          ticking = false;
+        });
+        ticking = true;
       }
-    });
+    };
 
-    if (closestIndex !== activeStoryIndex) {
-      setActiveStoryIndex(closestIndex);
-    }
-  }, [activeStoryIndex]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <section id="portfolio-news-insights" className="w-full bg-white py-12 md:py-20 border-t border-black/10">
+    <section id="portfolio-news-insights" className="w-full bg-white pt-6 sm:pt-8 pb-14 sm:pb-20 lg:pb-24">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        {/* Section Heading Row (Clean PedalStart/Neo-Editorial Style) */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
-          <div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-neutral-950 tracking-tight leading-[0.98]">
-              Portfolio News and Insights
-            </h2>
-          </div>
+        {/* Clear Heading Only */}
+        <div className="mb-6 sm:mb-8">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-neutral-950 tracking-tight leading-[1.05]">
+            Portfolio News &amp; Insights
+          </h2>
         </div>
 
         {/* ═══════════════════════════════════════════════════════════════
-            CONTAINED SPLIT-SCREEN LAYOUT (PedalStart UI/UX Architecture)
-            - LEFT: Featured News Card with top blue/teal banner & large image
-            - RIGHT: Open Borderless Scrollable News Feed List extending to right padding
-            - Both stay in this specific area while scrolling
+            STICKY SPLIT-SCREEN SCROLLYTELLING CONTAINER
         ═══════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start relative">
           {/* ─────────────────────────────────────────────────────────────
-              LEFT COLUMN: FEATURED CARD (MATCHING PEDALSTART BLUE BANNER + IMAGE)
+              LEFT COLUMN: MINIMALIST STICKY SHOWCASE CARD
           ───────────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col">
-            <div className="relative w-full h-[480px] sm:h-[540px] lg:h-[580px] rounded-3xl overflow-hidden border-2 border-neutral-950 bg-neutral-950 shadow-xl flex flex-col justify-between">
-              {/* TOP BANNER: Brand Teal (#036089) Header like PedalStart Blue Top */}
-              <div className="relative z-20 bg-[#036089] p-5 sm:p-6 lg:p-7 text-white shadow-md border-b border-white/10">
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-2">
-                    {/* Company Logo Badge */}
-                    <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 overflow-hidden shrink-0 shadow-xs">
+          <div className="lg:col-span-6 xl:col-span-6 lg:sticky lg:top-24 self-start">
+            <div className="w-full lg:h-[calc(100vh-140px)] lg:max-h-[640px] rounded-3xl border border-neutral-200/90 bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+              {/* TOP HEADER */}
+              <div>
+                <div className="flex items-center justify-between gap-3 pb-3 border-b border-neutral-100">
+                  <Link
+                    to="/portfolio/$slug"
+                    params={{ slug: activeStory.slug }}
+                    className="flex items-center gap-2.5 min-w-0 group/hdr cursor-pointer"
+                    title={`View ${activeStory.company} portfolio page`}
+                  >
+                    <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 overflow-hidden shrink-0 border border-neutral-200/80 shadow-2xs group-hover/hdr:border-neutral-950 transition-colors">
                       <img
                         src={activeStory.logo}
                         alt={activeStory.company}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <span className="font-mono text-xs uppercase tracking-wider text-white/90 font-bold">
+                    <span className="font-display font-bold text-sm text-neutral-950 group-hover/hdr:text-[#036089] transition-colors truncate">
                       {activeStory.company}
                     </span>
-                    <span className="text-white/40">·</span>
-                    <span className="font-mono text-xs text-[#C78D1E] font-bold uppercase tracking-wider">
+                    <span className="text-neutral-300">·</span>
+                    <span className="font-mono text-[11px] text-[#036089] font-bold uppercase tracking-wider truncate">
                       {activeStory.category}
                     </span>
-                  </div>
+                  </Link>
 
-                  {/* Impact Stat Badge */}
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-xs font-mono text-[11px] font-bold text-white">
+                  <span className="px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/80 font-mono text-[11px] font-bold text-neutral-900 shrink-0">
                     {activeStory.stat}
                   </span>
                 </div>
 
                 {/* Main Headline */}
-                <h3 className="font-display font-black text-lg sm:text-xl md:text-2xl text-white tracking-tight leading-snug line-clamp-2">
+                <h3 className="font-display font-black text-xl sm:text-2xl text-neutral-950 tracking-tight leading-snug line-clamp-2 mt-4">
                   {activeStory.headline}
                 </h3>
 
-                {/* Source & Date Subtitle */}
-                <div className="flex items-center gap-2 mt-2 font-sans text-xs text-white/80">
-                  <span className="font-semibold text-white">{activeStory.source}</span>
-                  <span className="opacity-50">·</span>
+                <div className="flex items-center gap-2 mt-2 font-mono text-[11px] text-neutral-500">
+                  <span className="font-semibold text-neutral-700">{activeStory.source}</span>
+                  <span>·</span>
                   <span>{activeStory.date}</span>
                 </div>
               </div>
 
-              {/* CENTER/BOTTOM: Large Visual Showcase Image with Crossfading */}
-              <div className="relative flex-1 w-full overflow-hidden bg-neutral-900">
+              {/* CENTER: Dedicated Framed Photograph Window with Smooth Crossfading */}
+              <div className="relative my-4 w-full h-[220px] sm:h-[260px] lg:flex-1 rounded-2xl overflow-hidden border border-neutral-200/90 bg-neutral-100 shadow-2xs">
                 {portfolioNewsData.map((story, i) => {
                   const isActive = activeStoryIndex === i;
                   return (
                     <div
                       key={story.id}
-                      className={`absolute inset-0 transition-all duration-600 ease-out ${isActive
-                        ? "opacity-100 scale-100 z-10"
-                        : "opacity-0 scale-105 z-0 pointer-events-none"
-                        }`}
+                      className={`absolute inset-0 transition-all duration-700 ease-out ${
+                        isActive
+                          ? "opacity-100 scale-100 z-10"
+                          : "opacity-0 scale-105 z-0 pointer-events-none"
+                      }`}
                     >
                       <img
                         src={story.image}
                         alt={story.headline}
-                        loading="lazy"
+                        loading={i < 2 ? "eager" : "lazy"}
                         className="w-full h-full object-cover object-center"
                       />
-                      {/* Gradient overlay for text contrast at the bottom */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                      {story.statLabel && (
+                        <div className="absolute bottom-3 left-3 right-3 z-10">
+                          <span className="inline-block px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white font-mono text-[10px] font-bold uppercase tracking-wider border border-white/20">
+                            {story.statLabel}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
+              </div>
 
-                {/* Bottom Overlaid Action Bar */}
-                <div className="absolute bottom-0 inset-x-0 z-20 p-5 sm:p-6 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                  <div className="max-w-md">
-                    <p className="font-sans text-xs sm:text-sm text-white/90 line-clamp-2 leading-relaxed drop-shadow-sm">
-                      {activeStory.summary}
-                    </p>
+              {/* BOTTOM: Summary & Actions */}
+              <div className="pt-2">
+                <p className="font-sans text-xs sm:text-sm text-neutral-600 line-clamp-2 leading-relaxed">
+                  {activeStory.quote ? `"${activeStory.quote}"` : activeStory.summary}
+                </p>
+
+                <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-neutral-100">
+                  <div className="font-mono text-[11px] text-neutral-400">
+                    Record {activeStoryIndex + 1 < 10 ? `0${activeStoryIndex + 1}` : activeStoryIndex + 1}
                   </div>
 
-                  {/* Action Links */}
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-2">
                     <Link
                       to="/portfolio/$slug"
                       params={{ slug: activeStory.slug }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/35 backdrop-blur-md border border-white/20 font-mono text-xs font-bold text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-neutral-950 hover:bg-[#036089] text-white font-mono text-xs font-bold transition-all shadow-2xs hover:shadow-xs cursor-pointer"
+                      title={`View ${activeStory.company} portfolio page`}
                     >
                       <span>Info</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -469,7 +484,7 @@ export function PortfolioNewsScrollytelling() {
                       href={activeStory.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#036089] hover:bg-[#024866] font-mono text-xs font-bold text-white shadow-xs transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 font-mono text-xs font-semibold border border-neutral-200/80 transition-colors cursor-pointer"
                     >
                       <span>Read Press</span>
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -481,82 +496,100 @@ export function PortfolioNewsScrollytelling() {
           </div>
 
           {/* ─────────────────────────────────────────────────────────────
-              RIGHT COLUMN: BORDERLESS SCROLLABLE NEWS FEED LIST (PedalStart Reference)
-              - Expands fully to right-side padding with no outer border box
-              - Internal smooth scroll with scroll-triggered preview switching
-              - Thumbnail on the right, headline on left, divider lines
+              RIGHT COLUMN: MINIMALIST EDITORIAL NEWS STREAM
           ───────────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col h-[480px] sm:h-[540px] lg:h-[580px] w-full">
-            {/* Scrollable List Container (Scrolled by wheel, touch, or click) */}
-            <div
-              ref={listContainerRef}
-              onScroll={handleListScroll}
-              className="w-full h-full overflow-y-auto divide-y divide-neutral-200/90 scroll-smooth overscroll-contain pr-1 sm:pr-2 focus:outline-none"
-              style={{
-                scrollbarWidth: "thin",
-                scrollbarColor: "#cbd5e1 transparent",
-              }}
-            >
-              {portfolioNewsData.map((item, index) => {
-                const isActive = activeStoryIndex === index;
-                return (
-                  <div
-                    key={item.id}
-                    ref={(el) => {
-                      itemRefs.current[index] = el;
-                    }}
-                    onClick={() => selectStory(index)}
-                    className={`py-4 sm:py-5 px-3 sm:px-4 transition-all duration-200 cursor-pointer flex items-center justify-between gap-4 sm:gap-6 group rounded-2xl ${isActive
-                      ? "bg-[#036089]/6 border-l-4 border-l-[#036089]"
-                      : "hover:bg-neutral-50/80 border-l-4 border-l-transparent"
-                      }`}
-                  >
-                    {/* Left: Headline & Meta Details */}
-                    <div className="flex-1 min-w-0 pr-2">
-                      <div className="flex items-center gap-2 mb-1.5 font-mono text-[11px]">
+          <div className="lg:col-span-6 xl:col-span-6 space-y-4">
+            {portfolioNewsData.map((item, index) => {
+              const isActive = activeStoryIndex === index;
+              return (
+                <article
+                  key={item.id}
+                  ref={(el) => {
+                    itemRefs.current[index] = el;
+                  }}
+                  onClick={() => selectStory(index)}
+                  className={`scroll-mt-28 p-5 sm:p-6 transition-all duration-300 cursor-pointer rounded-2xl sm:rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 group ${
+                    isActive
+                      ? "bg-white border-neutral-950 shadow-[0_4px_20px_rgba(0,0,0,0.06)] ring-1 ring-neutral-950/5 translate-x-1"
+                      : "bg-white/70 hover:bg-white border-neutral-200/80 hover:border-neutral-400 shadow-2xs hover:shadow-xs"
+                  }`}
+                >
+                  {/* Left: Content Details */}
+                  <div className="flex-1 min-w-0 pr-1">
+                    {/* Meta Row: Company Logo + Name + Index + Stat */}
+                    <div className="flex items-center flex-wrap gap-2 mb-2 font-mono text-xs">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center p-0.5 overflow-hidden shrink-0 border border-neutral-200">
+                          <img src={item.logo} alt={item.company} className="w-full h-full object-contain" />
+                        </div>
                         <span
-                          className={`font-bold uppercase tracking-wider ${isActive ? "text-[#036089]" : "text-neutral-500"
-                            }`}
+                          className={`font-bold uppercase tracking-wider ${
+                            isActive ? "text-[#036089]" : "text-neutral-700 group-hover:text-neutral-950"
+                          }`}
                         >
                           {item.company}
                         </span>
-                        <span className="text-neutral-300">·</span>
-                        <span className="text-neutral-400 font-medium">
-                          {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                        </span>
                       </div>
+                      <span className="text-neutral-300">·</span>
+                      <span className="text-neutral-400 font-semibold font-mono">
+                        {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      </span>
+                      <span className="text-neutral-300">·</span>
+                      <span className="px-2 py-0.5 rounded-full bg-neutral-100 font-mono text-[10px] font-bold text-neutral-700">
+                        {item.stat}
+                      </span>
+                    </div>
 
-                      {/* Headline (Matching PedalBuzz style) */}
-                      <h4
-                        className={`font-display text-sm sm:text-base leading-snug line-clamp-2 transition-colors ${isActive
+                    {/* Headline */}
+                    <h4
+                      className={`font-display text-base sm:text-lg leading-snug transition-colors ${
+                        isActive
                           ? "font-black text-neutral-950"
-                          : "font-semibold text-neutral-800 group-hover:text-[#036089]"
-                          }`}
-                      >
-                        {item.headline}
-                      </h4>
+                          : "font-bold text-neutral-800 group-hover:text-[#036089]"
+                      }`}
+                    >
+                      {item.headline}
+                    </h4>
 
-                      {/* Source & Date below */}
-                      <div className="flex items-center gap-2 mt-2 font-mono text-[11px] text-neutral-500">
-                        <span className="font-medium text-neutral-600">{item.source}</span>
+                    {/* Brief Summary Excerpt */}
+                    <p className="mt-2 text-xs sm:text-sm text-neutral-600 line-clamp-2 leading-relaxed font-sans">
+                      {item.summary}
+                    </p>
+
+                    {/* Source & Date below + Direct Portfolio Link */}
+                    <div className="flex items-center justify-between flex-wrap gap-2 mt-3 pt-2.5 border-t border-neutral-100 font-mono text-[11px] text-neutral-500">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-neutral-700">{item.source}</span>
                         <span>·</span>
                         <span>{item.date}</span>
                       </div>
-                    </div>
-
-                    {/* Right: Small Thumbnail Image (Matching PedalBuzz layout) */}
-                    <div className="w-20 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-neutral-200/90 bg-neutral-100 group-hover:shadow-xs transition-transform">
-                      <img
-                        src={item.image}
-                        alt={item.headline}
-                        loading="lazy"
-                        className={`w-full h-full transition-transform duration-300 ${isActive ? "scale-105" : "group-hover:scale-105"} ${item.company.toLowerCase().includes("internshala") ? "object-cover object-top" : "object-cover object-center"}`}
-                      />
+                      <Link
+                        to="/portfolio/$slug"
+                        params={{ slug: item.slug }}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#036089] hover:text-neutral-950 transition-colors cursor-pointer"
+                        title={`View ${item.company} portfolio page`}
+                      >
+                        <span>Info</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+
+                  {/* Right: Small Thumbnail Image */}
+                  <div className="w-full sm:w-28 md:w-32 aspect-video sm:aspect-square rounded-xl overflow-hidden shrink-0 border border-neutral-200/90 bg-neutral-100 group-hover:shadow-xs transition-transform">
+                    <img
+                      src={item.image}
+                      alt={item.headline}
+                      loading="lazy"
+                      className={`w-full h-full object-cover object-center transition-transform duration-500 ${
+                        isActive ? "scale-105" : "group-hover:scale-105"
+                      }`}
+                    />
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>
